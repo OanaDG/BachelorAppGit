@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "761104875744",
+    "project_id": "ecomm-f163b",
+    "storage_bucket": "ecomm-f163b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761104875744:android:0cd6eb7ac651d0835fd085",
+        "android_client_info": {
+          "package_name": "com.example.bachelorapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "761104875744-hk4d1nobgnbuif6o7et352d5p5kdtchl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bachelorapp",
+            "certificate_hash": "fee540b6e698a3cd9841c5acbb8a64a43afc289a"
+          }
+        },
+        {
+          "client_id": "761104875744-bd3ifbqljlfjngf98o0h99kji4qm8lai.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhx2c5IHjZ3p6O8cU53WrHfr7ZRBSs5Y8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "761104875744-bd3ifbqljlfjngf98o0h99kji4qm8lai.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

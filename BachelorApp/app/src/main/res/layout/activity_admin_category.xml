@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+
+    android:layout_height="match_parent"
+    tools:context=".AdminCategoryActivity">
+
+    <TextView
+        android:id="@+id/tvInstruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:textAlignment="center"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="@string/add_a_new_product" />
+
+    <LinearLayout
+
+        android:id="@+id/first_row"
+        android:layout_width="match_parent"
+        android:layout_height="267dp"
+        android:layout_below="@id/tvInstruction"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imgRecommender"
+            android:layout_width="220dp"
+            android:layout_height="150dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/recommender" />
+
+        <ImageView
+            android:id="@+id/imgBestseller"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/bestseller" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:gravity="top"
+
+        android:layout_below="@id/first_row"
+        >
+
+        <ImageView
+            android:id="@+id/imgDiscount"
+            android:layout_width="422dp"
+            android:layout_height="150dp"
+            android:layout_weight="1"
+            android:padding="6dp"
+            app:srcCompat="@drawable/discount" />
+
+        <ImageView
+            android:id="@+id/imgAll"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/book_pile" />
+    </LinearLayout>
+</RelativeLayout>

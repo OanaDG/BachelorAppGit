@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    tools:context=".LoginActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        app:srcCompat="@drawable/logo" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="282dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="272dp"
+        android:layout_marginRight="15dp"
+        android:backgroundTint="@color/colorAccent"
+        android:ems="10"
+        android:hint="@string/e_mail"
+        android:inputType="text|textNoSuggestions"
+        android:padding="10dp"
+        android:shadowColor="@color/colorAccent"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textCursorDrawable="@drawable/color_cursor"
+         />
+
+    <EditText
+        android:id="@+id/editTextTextPassword"
+        android:layout_width="282dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextTextPersonName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="15dp"
+        android:backgroundTint="@color/colorAccent"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:shadowColor="@color/colorAccent"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textCursorDrawable="@drawable/color_cursor" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextTextPassword"
+
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginRight="15dp"
+        android:buttonTint="@color/colorAccent"
+        android:shadowColor="@color/colorAccent"
+        android:text="@string/remember_me"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tvForgot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextTextPassword"
+        android:layout_marginLeft="230dp"
+        android:layout_marginTop="25.5dp"
+       android:padding="1dp"
+        android:text="@string/forgot_password"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/log_button"
+        android:layout_width="282dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkBox"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/button"
+        android:text="@string/log_in"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="250dp"
+        android:layout_below="@id/log_button"
+        android:text="@string/i_m_an_admin" />
+
+    <TextView
+        android:id="@+id/tvNotAdmin"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/log_button"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible"
+        android:layout_marginLeft="70dp"
+        android:layout_height="wrap_content"
+        android:text="@string/i_m_not_an_admin" />
+
+    <TextView
+        android:id="@+id/tvAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_marginTop="6dp"
+        android:padding="8dp"
+        android:layout_marginLeft="110dp"
+        android:layout_marginRight="15dp"
+        android:layout_below="@id/tvAdmin"
+        android:text="@string/don_t_have_an_account_yet" />
+
+    <TextView
+        android:id="@+id/tvSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up"
+        android:layout_marginLeft="110dp"
+        android:layout_marginRight="15dp"
+        android:layout_centerHorizontal="true"
+        android:shadowColor="@color/black"
+
+        android:textColor="@color/colorAccent"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_below="@id/tvAccount"/>
+
+
+</RelativeLayout>

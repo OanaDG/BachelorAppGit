@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/gradient"
+    android:layout_height="match_parent"
+    tools:context=".AdminAddProductActivity">
+
+    <ImageView
+        android:id="@+id/imgPhoto"
+        android:layout_width="306dp"
+        android:layout_height="156dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/photo" />
+
+    <EditText
+        android:id="@+id/etId"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint="@string/book_id"
+        android:background="@drawable/log_btn"
+        android:layout_below="@id/imgPhoto"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/etTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint="@string/book_title"
+        android:background="@drawable/log_btn"
+        android:layout_below="@id/etId"
+        android:textColor="@color/black"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:inputType="textPersonName"
+
+        />
+
+    <EditText
+        android:id="@+id/etAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint="@string/book_author"
+        android:background="@drawable/log_btn"
+        android:layout_below="@id/etTitle"
+        android:textColor="@color/black"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:inputType="textPersonName"
+        />
+
+    <EditText
+        android:id="@+id/etPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint="@string/book_price"
+        android:background="@drawable/log_btn"
+        android:layout_below="@id/etAuthor"
+        android:textColor="@color/black"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/etRating"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@id/etPrice"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/log_btn"
+        android:ems="10"
+        android:hint="@string/book_general_rating"
+        android:inputType="numberDecimal"
+        android:padding="5dp"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/etDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@id/etRating"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/log_btn"
+        android:ems="10"
+        android:hint="@string/book_description"
+
+        android:padding="5dp"
+        android:inputType="textPersonName"
+         />
+
+    <Button
+        android:id="@+id/add_book_btn"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button"
+        android:layout_below="@id/etDescription"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="@string/add_book" />
+</RelativeLayout>
