@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="tvCategoryRecommendation" type="id" />
+    <item name="tvCategoryBestsellers" type="id" />
+    <item name="tvCategoryDiscount" type="id" />
+    <item name="tvCategoryAll" type="id" />
+</resources>

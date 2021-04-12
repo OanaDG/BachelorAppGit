@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.chaquo.python'
 
 android {
     compileSdkVersion 30
@@ -13,6 +14,28 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+        }
+
+        python {
+            buildPython "C:/Users/madalin.ghita/AppData/Local/Programs/Python/Python39/python.exe"
+            pip {
+                // A pip requirement specifier, with or without a version number:
+
+                install "scipy"
+                install "numpy"
+
+
+                install "pandas"
+                install "pymysql"
+
+                install "scikit-learn"
+
+
+            }
+        }
     }
 
     buildTypes {
@@ -30,8 +53,10 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:26.6.0')
     implementation 'com.google.firebase:firebase-database:19.6.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.cepheuen.elegant-number-button:lib:1.0.2'
     implementation 'com.firebaseui:firebase-ui-database:7.1.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
     implementation 'com.google.firebase:firebase-storage:19.2.1'
     implementation 'io.paperdb:paperdb:2.7.1'
     implementation 'com.google.firebase:firebase-analytics'

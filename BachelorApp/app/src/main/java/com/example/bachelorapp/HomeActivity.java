@@ -1,7 +1,9 @@
 package com.example.bachelorapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,16 +12,23 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chaquo.python.PyObject;
+import com.chaquo.python.Python;
+import com.chaquo.python.android.AndroidPlatform;
 import com.example.bachelorapp.Collection.Collection;
 import com.example.bachelorapp.Model.Books;
 import com.example.bachelorapp.ViewHolder.BookViewHolder;
+import com.example.bachelorapp.ViewHolder.CategoryActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
@@ -35,22 +44,48 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.paperdb.Book;
 import io.paperdb.Paper;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+    private static final String TAG = HomeActivity.class.getSimpleName();
     private AppBarConfiguration mAppBarConfiguration;
     private DatabaseReference booksRef;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
+    String category;
+    DatabaseReference databaseReference;
+    List<Books> booksList = new ArrayList<>();
+    RecyclerView.Adapter adapter;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        booksRef = FirebaseDatabase.getInstance().getReference().child("Products");
+        Intent intent = getIntent();
+        category = intent.getStringExtra("category");
+        if(category.equals("Recommendations"))
+        {
+            progressDialog = new ProgressDialog(HomeActivity.this);
+            progressDialog.setTitle("Search for recommendations");
+            progressDialog.setMessage("Please wait a bit until we find the most suitable books for you");
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
+        }
+
+
+
+//        booksRef = FirebaseDatabase.getInstance().getReference().child("Products");
+//        booksRef.orderByChild("category").equalTo(category);
+
+
 
         Paper.init(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -78,51 +113,66 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         CircleImageView imgProfile = headerView.findViewById(R.id.user_profile_image);
 
         tvUsername.setText(Collection.currentUser.getUsername());
+        Picasso.get().load(Collection.currentUser.getImage()).placeholder(R.drawable.profile).into(imgProfile);
+
+
 
         recyclerView = findViewById(R.id.recycler_menu);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-//        mAppBarConfiguration = new AppBarConfiguration.Builder(
-//                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
-//                .setDrawerLayout(drawer)
-//                .build();
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-//        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-//        NavigationUI.setupWithNavController(navigationView, navController);
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        FirebaseRecyclerOptions<Books> options = new FirebaseRecyclerOptions.Builder<Books>().setQuery(booksRef, Books.class).build();
-
-        FirebaseRecyclerAdapter<Books, BookViewHolder> adapter = new FirebaseRecyclerAdapter<Books, BookViewHolder>(options) {
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Products");
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            protected void onBindViewHolder(@NonNull BookViewHolder holder, int position, @NonNull Books model) {
-                holder.tvBookTitle.setText(model.getTitle());
-                holder.tvBookAuthor.setText("by "+model.getAuthor());
-                holder.tvBookPrice.setText("Price = "+model.getPrice() + "lei");
-                holder.tvBookDescription.setText(model.getDescription());
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Books book = dataSnapshot.getValue(Books.class);
+                    if(category.equals("Recommendations")) {
 
-                Picasso.get().load(model.getImage()).into(holder.imgBook);
+                        if (!Python.isStarted()) {
+                            Python.start(new AndroidPlatform(HomeActivity.this));
+                        }
+
+                        Python py = Python.getInstance();
+                        int[] setData = new int[]{1, 2};
+                        PyObject pyObject2 = py.getModule("recsys");
+                        PyObject ob = pyObject2.callAttr("computeRec", setData);
+                        Log.d(TAG, "onDataChange: " + ob.toString());
+                        String[] pyBooks = ob.toString().split(", ");
+                        for(String s:pyBooks)
+                        {
+                            s = s.replace("'", "").replace("[", "").replace("]", "");
+                            Log.d(TAG, "onDataChange: " + s);
+                            if(s.equals(book.getTitle())) {
+                                booksList.add(book);
+                            }
+
+                        }
+                        progressDialog.dismiss();
+
+                    }
+                    else if(book.getCategory().equals(category) || category.equals("All Books")){
+
+                        Log.d(TAG, "onDataChange: " +category);
+                        booksList.add(book);
+                    }
+
+                }
+                adapter = new RecyclerViewAdapter(HomeActivity.this, booksList);
+
+                recyclerView.setAdapter(adapter);
+
             }
 
-            @NonNull
             @Override
-            public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-               View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.products_layout, parent, false);
-               BookViewHolder holder = new BookViewHolder(view);
-               return holder;
-            }
-        };
+            public void onCancelled(@NonNull DatabaseError error) {
 
-       recyclerView.setAdapter(adapter);
-       adapter.startListening();
+            }
+        });
+
     }
+
 
     @Override
     public void onBackPressed() {
@@ -152,11 +202,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
 
         if(itemId == R.id.nav_orders){
-
+            Intent intent = new Intent(this, BookDetailsActivity.class);
+            intent.putExtra("category", category);
+            startActivity(intent);
         }
 
         if(itemId == R.id.nav_category){
+            Intent intent = new Intent(this, CategoryActivity.class);
 
+            startActivity(intent);
         }
 
         if(itemId == R.id.nav_logout){
@@ -169,6 +223,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         if(itemId == R.id.nav_settings){
 
+            Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
+            startActivity(intent);
         }
 
 

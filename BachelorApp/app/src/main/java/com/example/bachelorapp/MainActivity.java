@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.bachelorapp.Collection.Collection;
 import com.example.bachelorapp.Model.Users;
+import com.example.bachelorapp.ViewHolder.CategoryActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,13 +29,12 @@ public class MainActivity extends AppCompatActivity {
     String parentDbName ="Users";
     ProgressDialog loading;
     Button btnLog;
+    int reload;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Log.d(TAG, "onCreate: ");
 
 
         Paper.init(this);
@@ -68,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
     private void allowAccessRemember(final String username, final String password) {
         final DatabaseReference rootRef;
         rootRef = FirebaseDatabase.getInstance().getReference();
+        Intent intent1 = getIntent();
+        reload = intent1.getIntExtra("reload", -1);
+
         rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -78,8 +81,17 @@ public class MainActivity extends AppCompatActivity {
                         if(data.getPassword().equals(password)){
                             Toast.makeText(MainActivity.this, "Logged in successfully", Toast.LENGTH_LONG).show();
                             loading.dismiss();
+                            Intent intent;
+                            if(reload == 1)
+                            {
+                                 intent = new Intent(MainActivity.this, HomeActivity.class);
 
-                            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                            }
+                            else{
+                                 intent = new Intent(MainActivity.this, CategoryActivity.class);
+                            }
+
+                            Collection.currentUser = data;
                             startActivity(intent);
                         }
                         else

@@ -44,27 +44,31 @@
 
         <TextView
 
-            android:id="@+id/tvBookPrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/book_price"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:layout_below="@id/imgBook"
-            android:textSize="18sp"
-            />
+        android:id="@+id/tvBookPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/book_price"
+        android:textAlignment="viewEnd"
+        android:layout_marginRight="30dp"
+        android:textColor="@color/colorAccent"
+        android:layout_below="@id/imgBook"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        />
 
         <TextView
 
-            android:id="@+id/tvBookDescription"
+            android:id="@+id/tvBookPriceCurrency"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/book_description"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:layout_marginTop="2dp"
-            android:layout_below="@id/tvBookPrice"
-            android:textSize="16sp"
+            android:text="@string/lei"
+            android:textAlignment="viewEnd"
+            android:layout_marginRight="5dp"
+            android:textColor="@color/colorAccent"
+            android:layout_below="@id/imgBook"
+
+            android:textSize="22sp"
+            android:textStyle="bold"
             />
 
     </RelativeLayout>

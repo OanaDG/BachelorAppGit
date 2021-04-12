@@ -6,7 +6,107 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SettingsActivity">
+<com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/app_bar_setings"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/colorPrimaryDark">
+  <androidx.appcompat.widget.Toolbar
+      android:id="@+id/toolbar_setings"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
 
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/tvCloseBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/back_button"
+        android:layout_alignParentStart="true"/>
 
-
+    <TextView
+        android:id="@+id/tvUpdateAccountBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="17dp"
+        android:layout_marginRight="15dp"
+        android:text="@string/update"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:textStyle="bold" />
   </RelativeLayout>
+  </androidx.appcompat.widget.Toolbar>
+
+
+</com.google.android.material.appbar.AppBarLayout>
+
+  <de.hdodenhof.circleimageview.CircleImageView
+      android:id="@+id/imgPhotoSettings"
+      android:layout_below="@id/tvProfileImageChange"
+      android:src="@drawable/profile"
+      android:layout_width="130dp"
+      android:layout_height="130dp"
+      android:layout_marginTop="15dp"
+      android:layout_marginLeft="50dp"
+      />
+
+  <TextView
+      android:id="@+id/tvProfileChange"
+      android:textColor="@color/colorPrimaryDark"
+      android:layout_marginTop="60dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/change_profile"
+      android:layout_below="@id/app_bar_setings"
+
+     android:layout_marginLeft="50dp"
+      android:textSize="17sp"
+      android:textStyle="bold"
+     />
+
+  <TextView
+      android:id="@+id/tvProfileImageChange"
+      android:textColor="@color/black"
+      android:layout_marginTop="40dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/profile_image"
+      android:layout_below="@id/tvProfileChange"
+
+      android:layout_marginLeft="50dp"
+      android:textSize="17sp"
+      android:textStyle="bold"
+      />
+
+
+
+  <TextView
+      android:id="@+id/tvEmailChange"
+      android:textColor="@color/black"
+      android:layout_marginTop="40dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/email"
+      android:layout_below="@id/imgPhotoSettings"
+
+      android:layout_marginLeft="50dp"
+      android:textSize="17sp"
+      android:textStyle="bold"
+      />
+
+  <EditText
+      android:id="@+id/etSettingsEmail"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:ems="10"
+      android:inputType="textEmailAddress"
+      android:backgroundTint="@color/colorAccent"
+      android:textCursorDrawable="@drawable/color_cursor"
+      android:textColorHint="@color/black"
+      android:layout_below="@id/tvEmailChange"
+      android:layout_marginTop="10dp"
+      android:layout_marginLeft="50dp"/>
+</RelativeLayout>

@@ -22,7 +22,7 @@ public class BookViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         tvBookTitle = itemView.findViewById(R.id.tvBookTitle);
         tvBookAuthor = itemView.findViewById(R.id.tvBookAuthor);
         tvBookPrice = itemView.findViewById(R.id.tvBookPrice);
-        tvBookDescription = itemView.findViewById(R.id.tvBookDescription);
+
     }
 
     public void setItemClickListener(ItemClickListener listener)

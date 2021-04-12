@@ -6,17 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class AdminCategoryActivity extends AppCompatActivity {
 
-    ImageView imgBestseller, imgRecommender, imgDiscount, imgAll;
+    ImageView imgBestseller, imgDiscount, imgAll, tvLogout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_category);
 
         imgBestseller = findViewById(R.id.imgBestseller);
-        imgRecommender = findViewById(R.id.imgRecommender);
+        tvLogout = findViewById(R.id.tvLogoutBtn);
         imgDiscount = findViewById(R.id.imgDiscount);
         imgAll = findViewById(R.id.imgAll);
 
@@ -29,14 +31,6 @@ public class AdminCategoryActivity extends AppCompatActivity {
             }
         });
 
-        imgRecommender.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AdminCategoryActivity.this, AdminAddProductActivity.class);
-                intent.putExtra("category", "Recommendations");
-                startActivity(intent);
-            }
-        });
 
         imgDiscount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +47,15 @@ public class AdminCategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminAddProductActivity.class);
                 intent.putExtra("category", "All Books");
                 startActivity(intent);
+            }
+        });
+
+        tvLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdminCategoryActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

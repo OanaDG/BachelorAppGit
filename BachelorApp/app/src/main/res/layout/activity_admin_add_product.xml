@@ -7,12 +7,38 @@
     android:layout_height="match_parent"
     tools:context=".AdminAddProductActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_setings"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_setings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/tvReturnBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/back_button"
+                    android:layout_alignParentStart="true"/>
+
+
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
     <ImageView
         android:id="@+id/imgPhoto"
         android:layout_width="306dp"
         android:layout_height="156dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:layout_below="@id/app_bar_setings"
         app:srcCompat="@drawable/photo" />
 
     <EditText
@@ -28,6 +54,7 @@
         android:layout_centerHorizontal="true"
         android:padding="5dp"
         android:inputType="number" />
+
 
     <EditText
         android:id="@+id/etTitle"

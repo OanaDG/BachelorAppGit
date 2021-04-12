@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
@@ -32,7 +33,7 @@ import java.util.HashMap;
 public class AdminAddProductActivity extends AppCompatActivity {
 
     String categoryName, description, title, author, id, price, rating, saveCurrentDate, saveCurrentTime, productRandomKey, downloadImageUrl;
-
+    TextView tvClose;
     Button btnAddProduct;
     EditText etTitle, etDescription, etPrice, etId, etAuthor, etRating;
     ImageView imgPhoto;
@@ -57,6 +58,8 @@ public class AdminAddProductActivity extends AppCompatActivity {
         etPrice = findViewById(R.id.etPrice);
         etRating = findViewById(R.id.etRating);
         etDescription = findViewById(R.id.etDescription);
+        tvClose = findViewById(R.id.tvReturnBtn);
+
         imgPhoto = findViewById(R.id.imgPhoto);
         loading = new ProgressDialog(this);
 
@@ -74,6 +77,15 @@ public class AdminAddProductActivity extends AppCompatActivity {
             }
         });
 
+        tvClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdminAddProductActivity.this, AdminCategoryActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
     private void validateBookData() {
@@ -83,6 +95,7 @@ public class AdminAddProductActivity extends AppCompatActivity {
         id = etId.getText().toString();
         rating = etRating.getText().toString();
         price = etPrice.getText().toString();
+
 
         if(imageUri == null)
         {
@@ -180,6 +193,7 @@ public class AdminAddProductActivity extends AppCompatActivity {
         productMap.put("price", price);
         productMap.put("rating", rating);
         productMap.put("description", description);
+
 
         productRef.child(productRandomKey).updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

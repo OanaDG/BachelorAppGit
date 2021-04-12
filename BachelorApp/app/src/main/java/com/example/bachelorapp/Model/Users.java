@@ -1,15 +1,15 @@
 package com.example.bachelorapp.Model;
 
 public class Users {
-    private String email, password, username;
+    private String email, password, username, image;
 
     public Users() {}
 
-
-    public Users(String email, String password, String username) {
+    public Users(String email, String password, String username, String image) {
         this.email = email;
         this.password = password;
         this.username = username;
+        this.image = image;
     }
 
     public String getEmail() {
@@ -34,5 +34,13 @@ public class Users {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

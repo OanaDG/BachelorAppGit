@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.bachelorapp.Collection.Collection;
 import com.example.bachelorapp.Model.Users;
+import com.example.bachelorapp.ViewHolder.CategoryActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -138,7 +139,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_LONG).show();
                                 loading.dismiss();
 
-                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, CategoryActivity.class);
                                 Collection.currentUser = data;
                                 startActivity(intent);
                             }
