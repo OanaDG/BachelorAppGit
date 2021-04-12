@@ -33,10 +33,9 @@ import java.util.HashMap;
 public class AdminAddProductActivity extends AppCompatActivity {
 
     String categoryName, description, title, author, id, price, rating, saveCurrentDate, saveCurrentTime, productRandomKey, downloadImageUrl;
-    TextView tvClose;
     Button btnAddProduct;
     EditText etTitle, etDescription, etPrice, etId, etAuthor, etRating;
-    ImageView imgPhoto;
+    ImageView imgPhoto, imgClose;
     private static final int galleryPic = 1;
     Uri imageUri;
     StorageReference productImagesRef;
@@ -58,7 +57,7 @@ public class AdminAddProductActivity extends AppCompatActivity {
         etPrice = findViewById(R.id.etPrice);
         etRating = findViewById(R.id.etRating);
         etDescription = findViewById(R.id.etDescription);
-        tvClose = findViewById(R.id.tvReturnBtn);
+        imgClose = findViewById(R.id.tvReturnBtn);
 
         imgPhoto = findViewById(R.id.imgPhoto);
         loading = new ProgressDialog(this);
@@ -77,7 +76,7 @@ public class AdminAddProductActivity extends AppCompatActivity {
             }
         });
 
-        tvClose.setOnClickListener(new View.OnClickListener() {
+        imgClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AdminAddProductActivity.this, AdminCategoryActivity.class);

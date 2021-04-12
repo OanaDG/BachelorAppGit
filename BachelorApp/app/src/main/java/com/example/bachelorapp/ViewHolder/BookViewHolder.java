@@ -12,7 +12,7 @@ import com.example.bachelorapp.R;
 
 public class BookViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    public TextView tvBookTitle, tvBookAuthor, tvBookDescription, tvBookPrice;
+    public TextView tvBookTitle, tvBookAuthor, tvBookPrice;
     public ImageView imgBook;
     public ItemClickListener listener;
     public BookViewHolder(@NonNull View itemView) {

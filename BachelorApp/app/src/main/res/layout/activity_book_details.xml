@@ -18,11 +18,13 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:padding="5dp">
                 <ImageView
                     android:id="@+id/tvReturnBookDetailsBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:src="@drawable/back_button"
                     android:layout_alignParentStart="true"/>
 
@@ -34,8 +36,10 @@
     <ImageView
         android:id="@+id/imgBookDetails"
         android:layout_width="match_parent"
-        android:layout_height="260dp"
-        android:scaleType="centerCrop" />
+        android:layout_height="300dp"
+        android:layout_below="@id/app_bar_setings"
+        android:scaleType="fitCenter"
+        android:layout_marginTop="15dp"/>
 
     <TextView
         android:id="@+id/tvBookDetailsTitle"
@@ -45,58 +49,78 @@
         android:text="@string/book_title"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:textSize="15sp"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/tvBookDetailsAuthor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvBookDetailsTitle"
+
+        android:text="@string/book_author"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="25sp"
         android:gravity="center"
         android:layout_marginTop="10dp"/>
+
+
+    <TextView
+        android:id="@+id/tvBookDetailsPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvBookDetailsAuthor"
+        android:text="@string/book_price"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/log_btn"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="12dp"
+        android:paddingLeft="12dp"
+        android:textSize="30sp"
+       android:layout_marginLeft="70dp"
+        android:layout_marginTop="20dp"/>
+
+
+
+    <TextView
+        android:id="@+id/tvBookDetailsDescriptionText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvBookDetailsPrice"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="50dp"
+        android:text="@string/description"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvBookDetailsDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvBookDetailsTitle"
+        android:layout_below="@id/tvBookDetailsDescriptionText"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
         android:text="@string/book_description"
         android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:gravity="center"
-        android:layout_marginTop="10dp"/>
+        android:textSize="20sp"
+        />
 
-    <TextView
-        android:id="@+id/tvBookDetailsPrice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvBookDetailsDescription"
-        android:text="@string/book_price"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:gravity="center"
-        android:layout_marginTop="10dp"/>
-
-    <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
-        android:id="@+id/btnBooksNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="6dp"
-        app:textSize="16sp"
-        app:initialNumber="1"
-        app:finalNumber="10"
-        app:backGroundColor="@color/colorPrimaryDark"
-        android:layout_below="@id/tvBookDetailsPrice"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp">
-
-    </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAddProductToCart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:elevation="6dp"
-        android:src="@drawable/nav_cart"
+
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_margin="15dp"/>
+        android:layout_margin="15dp"
+        android:elevation="6dp"
+        android:src="@drawable/nav_cart" />
 
 
 </RelativeLayout>

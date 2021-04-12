@@ -1,11 +1,13 @@
 package com.example.bachelorapp;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.ViewGroup;
@@ -202,9 +204,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
 
         if(itemId == R.id.nav_orders){
-            Intent intent = new Intent(this, BookDetailsActivity.class);
-            intent.putExtra("category", category);
-            startActivity(intent);
+
         }
 
         if(itemId == R.id.nav_category){
@@ -247,4 +247,56 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
 //                || super.onSupportNavigateUp();
 //    }
+
+    public class RecyclerViewAdapter extends RecyclerView.Adapter<BookViewHolder> {
+
+        Context context;
+        List<Books> booksList;
+
+        public RecyclerViewAdapter(Context context, List<Books> booksList) {
+            this.context = context;
+            this.booksList = booksList;
+        }
+
+        @NonNull
+        @Override
+        public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.products_layout, parent, false);
+
+            BookViewHolder viewHolder = new BookViewHolder(view);
+
+            return viewHolder;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
+            final Books book = booksList.get(position);
+
+            holder.tvBookTitle.setText(book.getTitle());
+            holder.tvBookAuthor.setText("by "+book.getAuthor());
+            holder.tvBookPrice.setText(book.getPrice());
+            // holder.tvBookDescription.setText(book.getDescription());
+
+            Picasso.get().load(book.getImage()).into(holder.imgBook);
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(HomeActivity.this, BookDetailsActivity.class);
+                    intent.putExtra("id", book.getPid());
+                    intent.putExtra("category", book.getCategory());
+                    startActivity(intent);
+
+                }
+            });
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return booksList.size();
+        }
+    }
+
 }
