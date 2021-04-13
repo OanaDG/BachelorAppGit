@@ -35,7 +35,7 @@ public class BookDetailsActivity extends AppCompatActivity {
     ImageView imgBook, btnBack;
     FloatingActionButton btnAddToCart;
     ElegantNumberButton btnBookNumber;
-    String category, bookId;
+    String category, bookId, bookImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class BookDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book_details);
 
         bookId = getIntent().getStringExtra("id");
+        bookImage = getIntent().getStringExtra("image");
         Log.d(TAG, "onCreate: " + bookId);
         category = getIntent().getStringExtra("category");
 
@@ -90,6 +91,7 @@ public class BookDetailsActivity extends AppCompatActivity {
 
         final HashMap<String, Object> cartMap = new HashMap<>();
         cartMap.put("id", bookId);
+        cartMap.put("image", bookImage);
         cartMap.put("title", tvTitle.getText().toString());
         cartMap.put("author", tvAuthor.getText().toString());
         cartMap.put("price", tvPrice.getText().toString());

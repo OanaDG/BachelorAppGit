@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -83,12 +84,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
 
 
-
-//        booksRef = FirebaseDatabase.getInstance().getReference().child("Products");
-//        booksRef.orderByChild("category").equalTo(category);
-
-
-
         Paper.init(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Home");
@@ -97,8 +92,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+                intent.putExtra("category", category);
+                startActivity(intent);
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -200,7 +197,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         int itemId = menuItem.getItemId();
 
         if(itemId == R.id.nav_cart){
-            Toast.makeText(this, "You are on the main menu", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+            intent.putExtra("category", category);
+            startActivity(intent);
         }
 
         if(itemId == R.id.nav_orders){
@@ -285,6 +284,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 public void onClick(View view) {
                     Intent intent = new Intent(HomeActivity.this, BookDetailsActivity.class);
                     intent.putExtra("id", book.getPid());
+                    intent.putExtra("image", book.getImage());
                     intent.putExtra("category", book.getCategory());
                     startActivity(intent);
 
