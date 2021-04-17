@@ -12,7 +12,7 @@ import com.example.bachelorapp.R;
 
 public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    public TextView tvTitle, tvAuthor, tvPrice;
+    public TextView tvTitle, tvAuthor, tvPrice, tvQuantity;
     public ImageView imgBook;
     private ItemClickListener itemClickListener;
 
@@ -22,6 +22,7 @@ public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         tvTitle = itemView.findViewById(R.id.tvBookCartTitle);
         tvAuthor = itemView.findViewById(R.id.tvBookCartAuthor);
         tvPrice = itemView.findViewById(R.id.tvBookCartPrice);
+        tvQuantity = itemView.findViewById(R.id.tvBookCartQuantity);
         imgBook = itemView.findViewById(R.id.imgBookCart);
     }
 

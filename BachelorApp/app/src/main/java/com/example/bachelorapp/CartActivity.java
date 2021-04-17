@@ -1,10 +1,12 @@
 package com.example.bachelorapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,12 +15,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.bachelorapp.Collection.Collection;
 import com.example.bachelorapp.Model.Cart;
 import com.example.bachelorapp.ViewHolder.CartViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -30,6 +35,7 @@ public class CartActivity extends AppCompatActivity {
     Button btnNext;
     ImageView btnBack;
     String category;
+    int totalOrderPrice = 0;
     TextView tvTotalPrice;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +65,18 @@ public class CartActivity extends AppCompatActivity {
             }
         });
 
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tvTotalPrice.setText("Total price = " + String.valueOf(totalOrderPrice) + " lei");
+
+                Intent intent = new Intent(CartActivity.this, ConfirmOrderActivity.class);
+                intent.putExtra("Total price", String.valueOf(totalOrderPrice));
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
     @Override
@@ -70,11 +88,64 @@ public class CartActivity extends AppCompatActivity {
 
         FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull Cart model) {
+            protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull final Cart model) {
                 holder.tvTitle.setText(model.getTitle());
                 holder.tvAuthor.setText(model.getAuthor());
-                holder.tvPrice.setText(model.getPrice());
+                holder.tvPrice.setText(model.getPrice() + " lei");
+                holder.tvQuantity.setText(model.getQuantity());
                 Picasso.get().load(model.getImage()).into(holder.imgBook);
+
+                int totalBookPrice = Integer.valueOf(model.getPrice()) *  Integer.valueOf(model.getQuantity());
+                totalOrderPrice += totalBookPrice;
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        CharSequence options[] = new CharSequence[] {
+                                "  Edit",
+                                "  Delete"
+                        };
+
+                        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CartActivity.this).setTitle("Choose option");
+                        alertDialogBuilder.setItems(options, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                if(i == 0) {
+                                    Intent intent = new Intent(CartActivity.this, BookDetailsActivity.class);
+                                    intent.putExtra("id", model.getId());
+                                    intent.putExtra("category", category);
+                                    intent.putExtra("image", model.getImage());
+                                    startActivity(intent);
+                                }
+
+                                else {
+                                        alertDialogBuilder.setMessage("   Do you want to delete this product?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                                            cartRef.child("User View").child(Collection.currentUser.getUsername()).child("Products").child(model.getId()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if(task.isSuccessful())
+                                                    {
+                                                        Toast.makeText(CartActivity.this, "The item was removed", Toast.LENGTH_SHORT).show();
+
+                                                    }
+                                                }
+                                            });
+
+                                        }
+                                    }).setNegativeButton("No", null).show();
+                                }
+                            }
+                        });
+
+                        alertDialogBuilder.show();
+
+                    }
+                });
             }
 
             @NonNull

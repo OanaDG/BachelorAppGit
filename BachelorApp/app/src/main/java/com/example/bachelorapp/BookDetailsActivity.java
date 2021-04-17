@@ -54,6 +54,7 @@ public class BookDetailsActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.tvReturnBookDetailsBtn);
         imgBook = findViewById(R.id.imgBookDetails);
         btnAddToCart = findViewById(R.id.btnAddProductToCart);
+        btnBookNumber = findViewById(R.id.btnBookNumber);
 
 
 
@@ -94,7 +95,8 @@ public class BookDetailsActivity extends AppCompatActivity {
         cartMap.put("image", bookImage);
         cartMap.put("title", tvTitle.getText().toString());
         cartMap.put("author", tvAuthor.getText().toString());
-        cartMap.put("price", tvPrice.getText().toString());
+        cartMap.put("price", tvPrice.getText().toString().replace(" lei", ""));
+        cartMap.put("quantity", btnBookNumber.getNumber());
         cartMap.put("date", currentDate);
 
         cartRef.child("User View").child(Collection.currentUser.getUsername()).child("Products").child(bookId).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -42,7 +42,7 @@
             android:layout_marginLeft="200dp"/>
 
         <TextView
-            android:id="@+id/tvBookCartQuantity"
+            android:id="@+id/tvBookCartQuantityText"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvBookCartAuthor"
@@ -53,34 +53,34 @@
             android:textSize="14sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/etQuantity"
-            android:layout_width="40dp"
+        <TextView
+            android:id="@+id/tvBookCartQuantity"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number"
             android:layout_below="@id/tvBookCartAuthor"
-            android:background="@drawable/log_btn"
+            android:layout_marginLeft="270dp"
             android:layout_marginTop="15dp"
+            android:text="@string/quantity"
             android:textColor="@color/white"
-            android:layout_marginLeft="300dp"
-            android:textAlignment="center"
-            android:padding="2dp"
-           />
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
 
 
         <TextView
             android:id="@+id/tvBookCartPrice"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginRight="5dp"
+            android:padding="5dp"
             android:textStyle="bold"
             android:text="@string/book_price"
             android:textColor="@color/white"
+            android:background="@drawable/log_btn"
             android:textSize="20sp"
             android:gravity="end"
-            android:layout_below="@id/etQuantity"
+            android:layout_below="@id/tvBookCartQuantity"
             android:layout_marginTop="40dp"
             />
     </RelativeLayout>

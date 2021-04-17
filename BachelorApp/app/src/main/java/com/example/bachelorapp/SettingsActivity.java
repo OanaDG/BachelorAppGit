@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +40,8 @@ public class SettingsActivity extends AppCompatActivity {
 
     CircleImageView imgProfileSettings;
     EditText etEmailSettings;
-    TextView tvClose, tvUpdate;
+    TextView tvUpdate;
+    ImageView tvClose;
     Uri imgUri;
     String myUrl = "";
     StorageReference storageProfilePictureRef;

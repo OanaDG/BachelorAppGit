@@ -1,19 +1,28 @@
 package com.example.bachelorapp.Model;
 
 public class Cart {
-    private String id, title, author, price, date, image;
+    private String id, title, author, price, date, image, quantity;
 
     public Cart() {
 
     }
 
-    public Cart(String id, String title, String author, String price, String date, String image) {
+    public Cart(String id, String title, String author, String price, String date, String image, String quantity) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.price = price;
         this.date = date;
         this.image = image;
+        this.quantity = quantity;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
     public String getImage() {
