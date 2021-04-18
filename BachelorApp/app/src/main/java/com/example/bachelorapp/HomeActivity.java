@@ -7,25 +7,20 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
 import com.example.bachelorapp.Collection.Collection;
 import com.example.bachelorapp.Model.Books;
+import com.example.bachelorapp.Model.RecommendationIds;
 import com.example.bachelorapp.ViewHolder.BookViewHolder;
 import com.example.bachelorapp.ViewHolder.CategoryActivity;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,10 +32,7 @@ import com.squareup.picasso.Picasso;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -51,7 +43,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import io.paperdb.Book;
 import io.paperdb.Paper;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -62,10 +53,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     String category;
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference, databaseReferenceRecommendations;
     List<Books> booksList = new ArrayList<>();
+    List<Integer> idsList = new ArrayList<>();
     RecyclerView.Adapter adapter;
     ProgressDialog progressDialog;
+    int[] setData = new int[]{};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,36 +114,82 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+        databaseReferenceRecommendations = FirebaseDatabase.getInstance().getReference().child("Recommendation Ids").child(Collection.currentUser.getUsername());
+        databaseReferenceRecommendations.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    RecommendationIds id = dataSnapshot.getValue(RecommendationIds.class);
+                    String recommendationId = id.getBookId();
+                    String[] allIds = recommendationId.split(", ");
+                    for(String s : allIds) {
+
+                        idsList.add(Integer.parseInt(recommendationId.replace("[", "").replace("]", "")));
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+//        int i = 0;
+//        for(int s : idsList) {
+//            setData [i] = s;
+//            i++;
+//        }
+//
+//        for(int j = 0; j<setData.length; j++) {
+//            Log.d(TAG, "ce avem in set data: " + setData[j]);
+//        }
+
+
+
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Products");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                String[] pyBooks = null;
+                if(category.equals("Recommendations")) {
+
+                    if (!Python.isStarted()) {
+                        Python.start(new AndroidPlatform(HomeActivity.this));
+                    }
+
+                    Python py = Python.getInstance();
+
+                    int[] setData = new int[idsList.size()];
+
+
+                    for(int i = 0; i<idsList.size(); i++) {
+                        setData[i] = idsList.get(i);
+                    }
+
+                    PyObject pyObject2 = py.getModule("recsys");
+                    PyObject ob = pyObject2.callAttr("computeRec", setData);
+                    Log.d(TAG, "recList: " + ob.toString());
+                    pyBooks = ob.toString().split(", ");
+
+
+                }
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Books book = dataSnapshot.getValue(Books.class);
                     if(category.equals("Recommendations")) {
-
-                        if (!Python.isStarted()) {
-                            Python.start(new AndroidPlatform(HomeActivity.this));
-                        }
-
-                        Python py = Python.getInstance();
-                        int[] setData = new int[]{1, 2};
-                        PyObject pyObject2 = py.getModule("recsys");
-                        PyObject ob = pyObject2.callAttr("computeRec", setData);
-                        Log.d(TAG, "onDataChange: " + ob.toString());
-                        String[] pyBooks = ob.toString().split(", ");
-                        for(String s:pyBooks)
-                        {
+                        for (String s : pyBooks) {
                             s = s.replace("'", "").replace("[", "").replace("]", "");
-                            Log.d(TAG, "onDataChange: " + s);
-                            if(s.equals(book.getTitle())) {
+
+                            if (s.equals(book.getTitle())) {
                                 booksList.add(book);
+                                Log.d(TAG, "onDataChange: " + s);
                             }
 
                         }
                         progressDialog.dismiss();
-
                     }
+
                     else if(book.getCategory().equals(category) || category.equals("All Books")){
 
                         Log.d(TAG, "onDataChange: " +category);
@@ -284,6 +323,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 public void onClick(View view) {
                     Intent intent = new Intent(HomeActivity.this, BookDetailsActivity.class);
                     intent.putExtra("id", book.getPid());
+                    intent.putExtra("recommendationId", book.getId());
                     intent.putExtra("image", book.getImage());
                     intent.putExtra("category", book.getCategory());
                     startActivity(intent);

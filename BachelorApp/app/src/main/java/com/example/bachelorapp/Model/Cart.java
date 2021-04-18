@@ -1,13 +1,13 @@
 package com.example.bachelorapp.Model;
 
 public class Cart {
-    private String id, title, author, price, date, image, quantity;
+    private String id, title, author, price, date, image, quantity, recommendationId;
 
     public Cart() {
 
     }
 
-    public Cart(String id, String title, String author, String price, String date, String image, String quantity) {
+    public Cart(String id, String title, String author, String price, String date, String image, String quantity, String recommendationId) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -15,6 +15,15 @@ public class Cart {
         this.date = date;
         this.image = image;
         this.quantity = quantity;
+        this.recommendationId = recommendationId;
+    }
+
+    public String getRecommendationId() {
+        return recommendationId;
+    }
+
+    public void setRecommendationId(String recommendationId) {
+        this.recommendationId = recommendationId;
     }
 
     public String getQuantity() {

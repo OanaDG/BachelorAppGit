@@ -93,26 +93,33 @@ model_knn.fit(rating_popular_book_matrix)
 
 
    # ind = [1, 2, 600]
+def checkBooks(initial_set, recommendation):
+    r = []
+    for x in recommendation:
+        if x not in initial_set:
+            r.append(x)
+    return r
+
+
 def computeRec(ind):
+    initial_set = []
     recommendation = []
+
+    res_data = []
+
     for i in range(0, len(ind)):
         query_index = ind[i]
         distances, indices = model_knn.kneighbors(rating_popular_book_pivot.iloc[query_index, :].values.reshape(1, -1), n_neighbors = 4)
 
 
-        # print(type(rating_popular_book_pivot.iloc[query_index, :]))
-        # print(query_index)
-        #
-        # print(rating_popular_book_pivot.iloc[query_index, :].name)
-        # print(distances)
-        # print(type(rating_popular_book_pivot.shape[0]))
-
-
         for i in range(0, len(distances.flatten())):
             if i == 0:
                 print('Recommendations for {0}:\n'.format(rating_popular_book_pivot.index[query_index]))
+                initial_set.append(rating_popular_book_pivot.index[query_index])
             else:
-                #print('{0}: {1}, with distance of {2}:'.format(i, rating_popular_book_pivot.index[indices.flatten()[i]], distances.flatten()[i]))
-                recommendation.append((rating_popular_book_pivot.index[indices.flatten()[i]]))
-    return recommendation
 
+
+                recommendation.append((rating_popular_book_pivot.index[indices.flatten()[i]]))
+                
+    rec = checkBooks(initial_set, recommendation)
+    return rec

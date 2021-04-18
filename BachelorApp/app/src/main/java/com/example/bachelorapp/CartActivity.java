@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,19 +19,30 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chaquo.python.PyObject;
+import com.chaquo.python.Python;
+import com.chaquo.python.android.AndroidPlatform;
 import com.example.bachelorapp.Collection.Collection;
+import com.example.bachelorapp.Model.Books;
 import com.example.bachelorapp.Model.Cart;
 import com.example.bachelorapp.ViewHolder.CartViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
 
+    private static final String TAG = CartActivity.class.getSimpleName();
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     Button btnNext;
@@ -37,6 +50,7 @@ public class CartActivity extends AppCompatActivity {
     String category;
     int totalOrderPrice = 0;
     TextView tvTotalPrice;
+    List<String> recommendationIdList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,10 +82,12 @@ public class CartActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tvTotalPrice.setText("Total price = " + String.valueOf(totalOrderPrice) + " lei");
+
 
                 Intent intent = new Intent(CartActivity.this, ConfirmOrderActivity.class);
                 intent.putExtra("Total price", String.valueOf(totalOrderPrice));
+                intent.putExtra("category", category);
+                intent.putStringArrayListExtra("recommendationList", (ArrayList<String>) recommendationIdList);
                 startActivity(intent);
                 finish();
             }
@@ -94,6 +110,8 @@ public class CartActivity extends AppCompatActivity {
                 holder.tvPrice.setText(model.getPrice() + " lei");
                 holder.tvQuantity.setText(model.getQuantity());
                 Picasso.get().load(model.getImage()).into(holder.imgBook);
+
+                recommendationIdList.add(model.getRecommendationId());
 
                 int totalBookPrice = Integer.valueOf(model.getPrice()) *  Integer.valueOf(model.getQuantity());
                 totalOrderPrice += totalBookPrice;
@@ -146,6 +164,29 @@ public class CartActivity extends AppCompatActivity {
 
                     }
                 });
+
+                tvTotalPrice.setText("Total price = " + String.valueOf(totalOrderPrice) + " lei");
+
+//                cartRef.child("User View").child(Collection.currentUser.getUsername()).child("Products").addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+//                            Cart book = dataSnapshot.getValue(Cart.class);
+//                            recommendationIdList.add(book.getRecommendationId());
+//
+//
+//                        }
+//
+//                        for(String s : recommendationIdList) {
+//                            Log.d(TAG, "onDataChange: " + s);
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
             }
 
             @NonNull

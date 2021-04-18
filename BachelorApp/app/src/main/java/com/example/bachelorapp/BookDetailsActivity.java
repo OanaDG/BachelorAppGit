@@ -35,7 +35,7 @@ public class BookDetailsActivity extends AppCompatActivity {
     ImageView imgBook, btnBack;
     FloatingActionButton btnAddToCart;
     ElegantNumberButton btnBookNumber;
-    String category, bookId, bookImage;
+    String category, bookId, bookImage, bookRecommendationId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class BookDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book_details);
 
         bookId = getIntent().getStringExtra("id");
+        bookRecommendationId = getIntent().getStringExtra("recommendationId");
         bookImage = getIntent().getStringExtra("image");
         Log.d(TAG, "onCreate: " + bookId);
         category = getIntent().getStringExtra("category");
@@ -85,19 +86,21 @@ public class BookDetailsActivity extends AppCompatActivity {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
         currentDate = dateFormat.format(date.getTime());
 
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss a");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm a");
         currentTime = dateFormat.format(date.getTime());
 
         final DatabaseReference cartRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
 
         final HashMap<String, Object> cartMap = new HashMap<>();
         cartMap.put("id", bookId);
+        cartMap.put("recommendationId", bookRecommendationId);
         cartMap.put("image", bookImage);
         cartMap.put("title", tvTitle.getText().toString());
         cartMap.put("author", tvAuthor.getText().toString());
         cartMap.put("price", tvPrice.getText().toString().replace(" lei", ""));
         cartMap.put("quantity", btnBookNumber.getNumber());
         cartMap.put("date", currentDate);
+        cartMap.put("time", currentTime);
 
         cartRef.child("User View").child(Collection.currentUser.getUsername()).child("Products").child(bookId).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

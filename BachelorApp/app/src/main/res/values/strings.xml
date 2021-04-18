@@ -61,7 +61,7 @@
     <string name="quantity">Quantity x </string>
     <string name="confirm_your_shipment_details_please">Confirm your shipment details please</string>
     <string name="phone_number">Phone number</string>
-    <string name="shipment_address">Shipment address</string>
+    <string name="shipment_address">Shipment address (street, apartment/house details, city)</string>
     <string name="confirm">Confirm</string>
 
 </resources>
