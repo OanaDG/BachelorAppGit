@@ -124,7 +124,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     String[] allIds = recommendationId.split(", ");
                     for(String s : allIds) {
 
-                        idsList.add(Integer.parseInt(recommendationId.replace("[", "").replace("]", "")));
+                        idsList.add(Integer.parseInt(s.replace("[", "").replace("]", "")));
                     }
 
                 }
@@ -135,17 +135,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
             }
         });
-
-//        int i = 0;
-//        for(int s : idsList) {
-//            setData [i] = s;
-//            i++;
-//        }
-//
-//        for(int j = 0; j<setData.length; j++) {
-//            Log.d(TAG, "ce avem in set data: " + setData[j]);
-//        }
-
 
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Products");

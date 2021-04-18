@@ -117,8 +117,9 @@ public class ConfirmOrderActivity extends AppCompatActivity {
                 final DatabaseReference recommendationRef = FirebaseDatabase.getInstance().getReference().child("Recommendation Ids").child(Collection.currentUser.getUsername()).child(currentDate + currentTime);
                 HashMap<String, Object> recommendationsMap = new HashMap<>();
 
-                    recommendationsMap.put("bookId", recommendationList.toString());
-                    recommendationRef.updateChildren(recommendationsMap);
+                recommendationsMap.put("bookId", recommendationList.toString());
+                recommendationsMap.put("orderId",currentDate + currentTime);
+                recommendationRef.updateChildren(recommendationsMap);
 
 
                 if(task.isSuccessful()) {

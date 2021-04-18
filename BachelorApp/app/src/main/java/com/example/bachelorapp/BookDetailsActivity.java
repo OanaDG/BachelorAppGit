@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.bachelorapp.Collection.Collection;
 import com.example.bachelorapp.Model.Books;
+import com.example.bachelorapp.Model.RecommendationIds;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -35,7 +37,9 @@ public class BookDetailsActivity extends AppCompatActivity {
     ImageView imgBook, btnBack;
     FloatingActionButton btnAddToCart;
     ElegantNumberButton btnBookNumber;
-    String category, bookId, bookImage, bookRecommendationId;
+    String category, bookId, bookImage, bookRecommendationId, orderId;
+    RatingBar ratingBar;
+    boolean noDuplicates = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,7 @@ public class BookDetailsActivity extends AppCompatActivity {
         imgBook = findViewById(R.id.imgBookDetails);
         btnAddToCart = findViewById(R.id.btnAddProductToCart);
         btnBookNumber = findViewById(R.id.btnBookNumber);
+        ratingBar = findViewById(R.id.ratingBar);
 
 
 
@@ -74,6 +79,99 @@ public class BookDetailsActivity extends AppCompatActivity {
                 addToCart();
             }
         });
+
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean b) {
+                final DatabaseReference recommendationRef = FirebaseDatabase.getInstance().getReference().child("Recommendation Ids").child(Collection.currentUser.getUsername());
+
+                recommendationRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            RecommendationIds rec = dataSnapshot.getValue(RecommendationIds.class);
+                            String recommendationId = rec.getBookId();
+                            String[] allIds = recommendationId.split(", ");
+                            for(String s : allIds) {
+                                if(s.replace("[", "").replace("]", "").equals(bookRecommendationId)) {
+                                    orderId = rec.getOrderId();
+                                    Log.d(TAG, "onRatingChanged: " +orderId);
+                                    noDuplicates = false;
+                                }
+
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                if(rating >= 3.5 && noDuplicates) {
+                    final String currentDate, currentTime;
+                    Calendar date = Calendar.getInstance();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
+                    currentDate = dateFormat.format(date.getTime());
+
+                    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss a");
+                    currentTime = timeFormat.format(date.getTime());
+
+                    HashMap<String, Object> recommendationsMap = new HashMap<>();
+
+                    recommendationsMap.put("bookId", bookRecommendationId);
+                    recommendationRef.child(currentDate + currentTime).updateChildren(recommendationsMap);
+
+
+                }
+
+
+            }
+        });
+//        ratingBar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.d(TAG, "onClick: cevaaa");
+//                if(ratingBar.getRating() >= 3.5) {
+//                    final String currentDate, currentTime;
+//                    Calendar date = Calendar.getInstance();
+//                    SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
+//                    currentDate = dateFormat.format(date.getTime());
+//
+//                    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss a");
+//                    currentTime = timeFormat.format(date.getTime());
+//
+//                    final DatabaseReference recommendationRef = FirebaseDatabase.getInstance().getReference().child("Recommendation Ids").child(Collection.currentUser.getUsername()).child(currentDate + currentTime);
+//
+//                    recommendationRef.addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                            for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                                RecommendationIds rec = dataSnapshot.getValue(RecommendationIds.class);
+//                                if(rec.getBookId().equals(bookRecommendationId)) {
+//                                    noDuplicates = false;
+//                                }
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError error) {
+//
+//                        }
+//                    });
+//
+//                    if(noDuplicates) {
+//                        HashMap<String, Object> recommendationsMap = new HashMap<>();
+//
+//                        recommendationsMap.put("bookId", bookRecommendationId);
+//                        recommendationRef.updateChildren(recommendationsMap);
+//                    }
+//
+//                }
+//            }
+//        });
 
         displayBookDetails(bookId);
 
