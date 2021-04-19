@@ -83,13 +83,18 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
+            if(totalOrderPrice > 0) {
                 Intent intent = new Intent(CartActivity.this, ConfirmOrderActivity.class);
                 intent.putExtra("Total price", String.valueOf(totalOrderPrice));
                 intent.putExtra("category", category);
                 intent.putStringArrayListExtra("recommendationList", (ArrayList<String>) recommendationIdList);
                 startActivity(intent);
                 finish();
+            }
+            else {
+                Toast.makeText(CartActivity.this, "The shopping cart is empty", Toast.LENGTH_SHORT).show();
+            }
+
             }
         });
 

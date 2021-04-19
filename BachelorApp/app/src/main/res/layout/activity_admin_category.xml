@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         android:textAlignment="center"
         android:textSize="26sp"
         android:textStyle="bold"
@@ -52,7 +52,7 @@
             android:layout_weight="1"
             app:srcCompat="@drawable/bestseller"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:layout_below="@id/tvInstruction"/>
         <TextView
             android:layout_width="wrap_content"
@@ -64,7 +64,7 @@
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:layout_marginTop="100dp"/>
+            android:layout_marginTop="90dp"/>
 
 
         <ImageView
@@ -72,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="150dp"
             android:layout_marginLeft="200dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:padding="6dp"
             app:srcCompat="@drawable/discount"
@@ -87,7 +87,7 @@
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:layout_marginTop="80dp"/>
+            android:layout_marginTop="70dp"/>
 
     <ImageView
         android:id="@+id/imgAll"
@@ -95,7 +95,7 @@
         android:layout_height="150dp"
         android:layout_below="@id/imgDiscount"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_weight="1"
         app:srcCompat="@drawable/book_pile" />
 
@@ -109,6 +109,21 @@
         android:textSize="22sp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:layout_marginTop="80dp"/>
+        android:layout_marginTop="70dp"/>
+
+    <Button
+        android:id="@+id/btnCheckOrders"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/log_btn"
+        android:text="@string/manage_orders"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textAllCaps="false"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="50dp"/>
 
 </RelativeLayout>

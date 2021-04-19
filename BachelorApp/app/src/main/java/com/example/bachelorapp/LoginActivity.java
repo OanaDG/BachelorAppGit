@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.example.bachelorapp.Collection.Collection;
 import com.example.bachelorapp.Model.Users;
-import com.example.bachelorapp.ViewHolder.CategoryActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

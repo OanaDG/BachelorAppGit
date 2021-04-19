@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class AdminCategoryActivity extends AppCompatActivity {
 
     ImageView imgBestseller, imgDiscount, imgAll, tvLogout;
+    Button btnManageOrders;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         tvLogout = findViewById(R.id.tvLogoutBtn);
         imgDiscount = findViewById(R.id.imgDiscount);
         imgAll = findViewById(R.id.imgAll);
+        btnManageOrders = findViewById(R.id.btnCheckOrders);
 
         imgBestseller.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,8 +57,17 @@ public class AdminCategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AdminCategoryActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        btnManageOrders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdminCategoryActivity.this, AdminManageOrdersActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -19,7 +19,6 @@ import com.example.bachelorapp.Collection.Collection;
 import com.example.bachelorapp.Model.Books;
 import com.example.bachelorapp.Model.RecommendationIds;
 import com.example.bachelorapp.ViewHolder.BookViewHolder;
-import com.example.bachelorapp.ViewHolder.CategoryActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;

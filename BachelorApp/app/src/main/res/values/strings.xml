@@ -63,5 +63,9 @@
     <string name="phone_number">Phone number</string>
     <string name="shipment_address">Shipment address (street, apartment/house details, city)</string>
     <string name="confirm">Confirm</string>
+    <string name="manage_orders">Manage orders</string>
+    <string name="manage_order">Manage order</string>
+    <string name="date_time">Date, Time</string>
+    <string name="show_products">Show Products</string>
 
 </resources>

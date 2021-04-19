@@ -13,10 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ConfirmOrderActivity"></activity>
+        <activity android:name=".AdminManageOrdersActivity"></activity>
+        <activity android:name=".ConfirmOrderActivity" />
         <activity android:name=".CartActivity" />
         <activity android:name=".BookDetailsActivity" />
-        <activity android:name=".ViewHolder.CategoryActivity" />
+        <activity android:name=".CategoryActivity" />
         <activity android:name=".SettingsActivity" />
         <activity
             android:name=".HomeActivity"
