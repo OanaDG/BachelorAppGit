@@ -1,20 +1,19 @@
 package com.example.bachelorapp.Model;
 
 public class Orders {
-    private String address, date, email, name, phone, state, time, totalPrice;
+    private String address, dateTime, email, name, phone, state , totalPrice;
 
     public Orders() {
 
     }
 
-    public Orders(String address, String date, String email, String name, String phone, String state, String time, String totalPrice) {
+    public Orders(String address, String dateTime, String email, String name, String phone, String state, String totalPrice) {
         this.address = address;
-        this.date = date;
+        this.dateTime = dateTime;
         this.email = email;
         this.name = name;
         this.phone = phone;
         this.state = state;
-        this.time = time;
         this.totalPrice = totalPrice;
     }
 
@@ -26,12 +25,12 @@ public class Orders {
         this.address = address;
     }
 
-    public String getDate() {
-        return date;
+    public String getDateTime() {
+        return dateTime;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
 
     public String getEmail() {
@@ -64,14 +63,6 @@ public class Orders {
 
     public void setState(String state) {
         this.state = state;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     public String getTotalPrice() {

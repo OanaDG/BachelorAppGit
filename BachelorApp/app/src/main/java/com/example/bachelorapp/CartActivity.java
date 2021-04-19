@@ -172,26 +172,6 @@ public class CartActivity extends AppCompatActivity {
 
                 tvTotalPrice.setText("Total price = " + String.valueOf(totalOrderPrice) + " lei");
 
-//                cartRef.child("User View").child(Collection.currentUser.getUsername()).child("Products").addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-//                            Cart book = dataSnapshot.getValue(Cart.class);
-//                            recommendationIdList.add(book.getRecommendationId());
-//
-//
-//                        }
-//
-//                        for(String s : recommendationIdList) {
-//                            Log.d(TAG, "onDataChange: " + s);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//                });
             }
 
             @NonNull

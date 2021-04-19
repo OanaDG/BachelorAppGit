@@ -67,5 +67,7 @@
     <string name="manage_order">Manage order</string>
     <string name="date_time">Date, Time</string>
     <string name="show_products">Show Products</string>
+    <string name="username_order_datetime">Username order dateTime</string>
+    <string name="products">Products</string>
 
 </resources>

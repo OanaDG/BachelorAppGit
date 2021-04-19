@@ -39,7 +39,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
@@ -123,7 +125,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     String[] allIds = recommendationId.split(", ");
                     for(String s : allIds) {
 
-                        idsList.add(Integer.parseInt(s.replace("[", "").replace("]", "")));
+                            idsList.add(Integer.parseInt(s.replace("[", "").replace("]", "")));
+
+
                     }
 
                 }
@@ -149,11 +153,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
                     Python py = Python.getInstance();
 
-                    int[] setData = new int[idsList.size()];
+                    Set<Integer> uniqueIdsSet = new HashSet<>(idsList);
+                    List<Integer> uniqueIdsList = new ArrayList<>(uniqueIdsSet);
+
+                    int[] setData = new int[uniqueIdsList.size()];
 
 
-                    for(int i = 0; i<idsList.size(); i++) {
-                        setData[i] = idsList.get(i);
+                    for(int i = 0; i<uniqueIdsList.size(); i++) {
+                        setData[i] = uniqueIdsList.get(i);
                     }
 
                     PyObject pyObject2 = py.getModule("recsys");
