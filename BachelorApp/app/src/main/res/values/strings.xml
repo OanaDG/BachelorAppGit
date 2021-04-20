@@ -69,5 +69,15 @@
     <string name="show_products">Show Products</string>
     <string name="username_order_datetime">Username order dateTime</string>
     <string name="products">Products</string>
+    <string name="search">Search</string>
+    <string name="books">Books</string>
+    <string name="product_maintenance">Product Maintenance</string>
+    <string name="apply_changes">Apply changes</string>
+    <string-array name="spinner">
+        <item>Bestsellers</item>
+        <item>Discounts</item>
+        <item>All Books</item>
+    </string-array>
+
 
 </resources>

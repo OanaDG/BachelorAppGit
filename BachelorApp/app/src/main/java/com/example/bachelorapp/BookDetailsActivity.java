@@ -130,48 +130,7 @@ public class BookDetailsActivity extends AppCompatActivity {
 
             }
         });
-//        ratingBar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Log.d(TAG, "onClick: cevaaa");
-//                if(ratingBar.getRating() >= 3.5) {
-//                    final String currentDate, currentTime;
-//                    Calendar date = Calendar.getInstance();
-//                    SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
-//                    currentDate = dateFormat.format(date.getTime());
-//
-//                    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss a");
-//                    currentTime = timeFormat.format(date.getTime());
-//
-//                    final DatabaseReference recommendationRef = FirebaseDatabase.getInstance().getReference().child("Recommendation Ids").child(Collection.currentUser.getUsername()).child(currentDate + currentTime);
-//
-//                    recommendationRef.addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                            for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                                RecommendationIds rec = dataSnapshot.getValue(RecommendationIds.class);
-//                                if(rec.getBookId().equals(bookRecommendationId)) {
-//                                    noDuplicates = false;
-//                                }
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//
-//                        }
-//                    });
-//
-//                    if(noDuplicates) {
-//                        HashMap<String, Object> recommendationsMap = new HashMap<>();
-//
-//                        recommendationsMap.put("bookId", bookRecommendationId);
-//                        recommendationRef.updateChildren(recommendationsMap);
-//                    }
-//
-//                }
-//            }
-//        });
+
 
         displayBookDetails(bookId);
 

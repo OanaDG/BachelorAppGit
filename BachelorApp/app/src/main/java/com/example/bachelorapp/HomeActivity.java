@@ -53,7 +53,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private DatabaseReference booksRef;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    String category;
+    String category, status;
     DatabaseReference databaseReference, databaseReferenceRecommendations;
     List<Books> booksList = new ArrayList<>();
     List<Integer> idsList = new ArrayList<>();
@@ -68,6 +68,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         Intent intent = getIntent();
         category = intent.getStringExtra("category");
+        status = intent.getStringExtra("Admin");
+
         if(category.equals("Recommendations"))
         {
             progressDialog = new ProgressDialog(HomeActivity.this);
@@ -104,6 +106,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         View headerView = navigationView.getHeaderView(0);
         TextView tvUsername = headerView.findViewById(R.id.tvUsername);
         CircleImageView imgProfile = headerView.findViewById(R.id.user_profile_image);
+
 
         tvUsername.setText(Collection.currentUser.getUsername());
         Picasso.get().load(Collection.currentUser.getImage()).placeholder(R.drawable.profile).into(imgProfile);
@@ -236,8 +239,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
         }
 
+        if(itemId == R.id.nav_search){
+
+            Intent intent = new Intent(this, SearchBooksActivity.class);
+
+            startActivity(intent);
+        }
+
         if(itemId == R.id.nav_orders){
 
+            Intent intent = new Intent(this, OrdersActivity.class);
+            intent.putExtra("category", category);
+            startActivity(intent);
         }
 
         if(itemId == R.id.nav_category){
@@ -269,17 +282,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.home, menu);
         return true;
     }
-//
-//    @Override
-//    public boolean onSupportNavigateUp() {
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-//        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-//                || super.onSupportNavigateUp();
-//    }
+
 
     public class RecyclerViewAdapter extends RecyclerView.Adapter<BookViewHolder> {
 
@@ -309,19 +316,31 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             holder.tvBookTitle.setText(book.getTitle());
             holder.tvBookAuthor.setText("by "+book.getAuthor());
             holder.tvBookPrice.setText(book.getPrice());
-            // holder.tvBookDescription.setText(book.getDescription());
+
 
             Picasso.get().load(book.getImage()).into(holder.imgBook);
+
+
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(HomeActivity.this, BookDetailsActivity.class);
-                    intent.putExtra("id", book.getPid());
-                    intent.putExtra("recommendationId", book.getId());
-                    intent.putExtra("image", book.getImage());
-                    intent.putExtra("category", book.getCategory());
-                    startActivity(intent);
+                    if(status.equals("Admin")) {
+                        Intent intent = new Intent(HomeActivity.this, AdminProductMaintenanceActivity.class);
+                        intent.putExtra("id", book.getPid());
+                        intent.putExtra("image", book.getImage());
+                        intent.putExtra("category", book.getCategory());
+                        startActivity(intent);
+                    }
+                    else {
+                        Intent intent = new Intent(HomeActivity.this, BookDetailsActivity.class);
+                        intent.putExtra("id", book.getPid());
+                        intent.putExtra("recommendationId", book.getId());
+                        intent.putExtra("image", book.getImage());
+                        intent.putExtra("category", book.getCategory());
+                        startActivity(intent);
+
+                    }
 
                 }
             });

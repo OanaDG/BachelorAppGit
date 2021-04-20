@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import io.paperdb.Paper;
+
 public class CategoryActivity extends AppCompatActivity {
 
     ImageView imgRecommendation, imgBestseller, imgDiscount, imgAll, imgLogoutBtn;
@@ -71,8 +73,9 @@ public class CategoryActivity extends AppCompatActivity {
         imgLogoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CategoryActivity.this, LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                Paper.book().destroy();
+                Intent intent = new Intent(CategoryActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
             }

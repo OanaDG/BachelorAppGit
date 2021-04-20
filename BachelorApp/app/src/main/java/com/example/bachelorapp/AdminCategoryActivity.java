@@ -12,7 +12,7 @@ import android.widget.TextView;
 public class AdminCategoryActivity extends AppCompatActivity {
 
     ImageView imgBestseller, imgDiscount, imgAll, tvLogout;
-    Button btnManageOrders;
+    Button btnManageOrders, btnProductMaintenance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +24,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         imgDiscount = findViewById(R.id.imgDiscount);
         imgAll = findViewById(R.id.imgAll);
         btnManageOrders = findViewById(R.id.btnCheckOrders);
+        btnProductMaintenance = findViewById(R.id.btnMaintenance);
 
         imgBestseller.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +68,16 @@ public class AdminCategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminManageOrdersActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnProductMaintenance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdminCategoryActivity.this, HomeActivity.class);
+                intent.putExtra("Admin", "Admin");
+                intent.putExtra("category", "All Books");
                 startActivity(intent);
             }
         });

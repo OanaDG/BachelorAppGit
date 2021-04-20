@@ -1,9 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SearchBooksActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/layoutSearchBooks"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+
+        android:layout_alignParentRight="true">
+
+       <EditText
+           android:id="@+id/etSearchBook"
+           android:layout_width="290dp"
+           android:layout_height="wrap_content"
+           android:hint="@string/book_title"
+           android:textSize="18sp"
+           android:textStyle="bold"
+           android:background="@color/white"
+           android:padding="9dp"
+           android:layout_marginStart="5dp"
+           android:layout_centerVertical="true"
+           android:textColorHint="@color/colorPrimaryDark"/>
+
+        <Button
+            android:id="@+id/btnSearchBook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search"
+            android:padding="9dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:background="@color/colorPrimaryDark"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@id/etSearchBook"/>
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/layoutSearchList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/layoutSearchBooks"/>
+
+</RelativeLayout>

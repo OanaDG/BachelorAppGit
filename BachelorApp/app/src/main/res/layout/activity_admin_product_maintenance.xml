@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="20dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp"
+    app:cardElevation="15dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_setings"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimary">
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_setings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+                    <ImageView
+                        android:id="@+id/imgReturnBookMaintenanceBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/back_button"
+                        android:layout_alignParentStart="true"/>
+
+
+                </RelativeLayout>
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <ImageView
+            android:id="@+id/imgBookMaintenance"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/app_bar_setings"
+            android:scaleType="fitCenter"
+            android:layout_marginTop="2dp"/>
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="300dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imgBookMaintenance"
+            android:entries="@array/spinner"
+            android:textAlignment="center"
+            android:padding="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/log_btn"/>
+
+        <EditText
+
+            android:id="@+id/etBookPrice"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/book_price"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/colorAccent"
+            android:background="@drawable/log_btn"
+            android:padding="12dp"
+            android:layout_below="@id/spinner"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            />
+
+
+        <EditText
+
+            android:id="@+id/etBookDescription"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/book_description"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/colorAccent"
+            android:background="@drawable/log_btn"
+            android:padding="12dp"
+            android:layout_marginTop="5dp"
+
+            android:layout_below="@id/etBookPrice"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            />
+
+        <Button
+
+            android:id="@+id/btnApplyChanges"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="@string/apply_changes"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:background="@drawable/button"
+            android:padding="12dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_below="@id/etBookDescription"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
+
+
+
+    </RelativeLayout>
+
+
+
+</androidx.cardview.widget.CardView>
