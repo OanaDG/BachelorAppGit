@@ -108,8 +108,35 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         CircleImageView imgProfile = headerView.findViewById(R.id.user_profile_image);
 
 
-        tvUsername.setText(Collection.currentUser.getUsername());
-        Picasso.get().load(Collection.currentUser.getImage()).placeholder(R.drawable.profile).into(imgProfile);
+        if(status == null) {
+            tvUsername.setText(Collection.currentUser.getUsername());
+            Picasso.get().load(Collection.currentUser.getImage()).placeholder(R.drawable.profile).into(imgProfile);
+
+            databaseReferenceRecommendations = FirebaseDatabase.getInstance().getReference().child("Recommendation Ids").child(Collection.currentUser.getUsername());
+            databaseReferenceRecommendations.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        RecommendationIds id = dataSnapshot.getValue(RecommendationIds.class);
+                        String recommendationId = id.getBookId();
+                        String[] allIds = recommendationId.split(", ");
+                        for(String s : allIds) {
+
+                            idsList.add(Integer.parseInt(s.replace("[", "").replace("]", "")));
+
+
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        }
 
 
 
@@ -118,29 +145,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        databaseReferenceRecommendations = FirebaseDatabase.getInstance().getReference().child("Recommendation Ids").child(Collection.currentUser.getUsername());
-        databaseReferenceRecommendations.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    RecommendationIds id = dataSnapshot.getValue(RecommendationIds.class);
-                    String recommendationId = id.getBookId();
-                    String[] allIds = recommendationId.split(", ");
-                    for(String s : allIds) {
 
-                            idsList.add(Integer.parseInt(s.replace("[", "").replace("]", "")));
-
-
-                    }
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Products");
@@ -325,7 +330,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(status.equals("Admin")) {
+                    if(status != null) {
                         Intent intent = new Intent(HomeActivity.this, AdminProductMaintenanceActivity.class);
                         intent.putExtra("id", book.getPid());
                         intent.putExtra("image", book.getImage());

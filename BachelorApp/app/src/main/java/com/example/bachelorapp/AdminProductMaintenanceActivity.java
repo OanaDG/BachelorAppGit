@@ -47,8 +47,8 @@ public class AdminProductMaintenanceActivity extends AppCompatActivity {
 
         btnApplyChanges = findViewById(R.id.btnApplyChanges);
         btnBack = findViewById(R.id.imgReturnBookMaintenanceBtn);
-        etPrice = findViewById(R.id.etPrice);
-        etDescription = findViewById(R.id.etDescription);
+        etPrice = findViewById(R.id.etBookPriceMaintenance);
+        etDescription = findViewById(R.id.etBookDescriptionMaintenance);
         categorySpinner = findViewById(R.id.spinner);
         imgBook = findViewById(R.id.imgBookMaintenance);
 
@@ -75,6 +75,7 @@ public class AdminProductMaintenanceActivity extends AppCompatActivity {
     private void applyChanges() {
         String price = etPrice.getText().toString();
         String description = etDescription.getText().toString();
+        String categoryChanged = categorySpinner.getSelectedItem().toString();
 
         if(price.equals("")) {
             Toast.makeText(AdminProductMaintenanceActivity.this, "Add a price please", Toast.LENGTH_SHORT).show();
@@ -85,7 +86,7 @@ public class AdminProductMaintenanceActivity extends AppCompatActivity {
 
         HashMap<String, Object> productMap = new HashMap<>();
         productMap.put("pid", bookId);
-        productMap.put("category", category);
+        productMap.put("category", categoryChanged);
         productMap.put("image", bookImage);
         productMap.put("price", price);
         productMap.put("description", description);

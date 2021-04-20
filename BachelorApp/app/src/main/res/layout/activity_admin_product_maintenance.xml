@@ -62,12 +62,12 @@
 
         <EditText
 
-            android:id="@+id/etBookPrice"
+            android:id="@+id/etBookPriceMaintenance"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:hint="@string/book_price"
             android:layout_centerHorizontal="true"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/black"
             android:background="@drawable/log_btn"
             android:padding="12dp"
             android:layout_below="@id/spinner"
@@ -80,17 +80,17 @@
 
         <EditText
 
-            android:id="@+id/etBookDescription"
+            android:id="@+id/etBookDescriptionMaintenance"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:hint="@string/book_description"
             android:layout_centerHorizontal="true"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/black"
             android:background="@drawable/log_btn"
             android:padding="12dp"
             android:layout_marginTop="5dp"
 
-            android:layout_below="@id/etBookPrice"
+            android:layout_below="@id/etBookPriceMaintenance"
             android:textAlignment="center"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -108,7 +108,7 @@
             android:padding="12dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:layout_below="@id/etBookDescription"
+            android:layout_below="@id/etBookDescriptionMaintenance"
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="bold"

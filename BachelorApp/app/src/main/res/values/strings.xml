@@ -75,7 +75,7 @@
     <string name="apply_changes">Apply changes</string>
     <string-array name="spinner">
         <item>Bestsellers</item>
-        <item>Discounts</item>
+        <item>Discounted</item>
         <item>All Books</item>
     </string-array>
 
