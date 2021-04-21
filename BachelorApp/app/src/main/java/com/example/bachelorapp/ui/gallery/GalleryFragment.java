@@ -1,4 +1,4 @@
-package com.example.bachelorapp.ui.gallery;
+package com.example.bachelorapp.UI.gallery;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -19,6 +19,7 @@ import com.example.bachelorapp.Collection.Collection;
 import com.example.bachelorapp.Model.Books;
 import com.example.bachelorapp.Model.RecommendationIds;
 import com.example.bachelorapp.ViewHolder.BookViewHolder;
+import com.example.bachelorapp.Admin.AdminProductMaintenanceActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -53,7 +54,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private DatabaseReference booksRef;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    String category, status;
+    String category, status = "User";
     DatabaseReference databaseReference, databaseReferenceRecommendations;
     List<Books> booksList = new ArrayList<>();
     List<Integer> idsList = new ArrayList<>();
@@ -68,7 +69,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         Intent intent = getIntent();
         category = intent.getStringExtra("category");
-        status = intent.getStringExtra("Admin");
+        if(intent.getStringExtra("Admin") != null) {
+            status = intent.getStringExtra("Admin");
+        }
+
 
         if(category.equals("Recommendations"))
         {
@@ -89,9 +93,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
-                intent.putExtra("category", category);
-                startActivity(intent);
+                if(!status.equals("Admin")) {
+                    Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+                    intent.putExtra("category", category);
+                    startActivity(intent);
+                }
+
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -108,7 +115,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         CircleImageView imgProfile = headerView.findViewById(R.id.user_profile_image);
 
 
-        if(status == null) {
+        if(status.equals("User")) {
             tvUsername.setText(Collection.currentUser.getUsername());
             Picasso.get().load(Collection.currentUser.getImage()).placeholder(R.drawable.profile).into(imgProfile);
 
@@ -215,6 +222,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -238,46 +246,49 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int itemId = menuItem.getItemId();
 
-        if(itemId == R.id.nav_cart){
-            Intent intent = new Intent(HomeActivity.this, CartActivity.class);
-            intent.putExtra("category", category);
-            startActivity(intent);
+        if(!status.equals("Admin")) {
+
+            if(itemId == R.id.nav_cart){
+                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+                intent.putExtra("category", category);
+                startActivity(intent);
+            }
+
+            if(itemId == R.id.nav_search){
+
+                Intent intent = new Intent(this, SearchBooksActivity.class);
+
+                startActivity(intent);
+            }
+
+            if(itemId == R.id.nav_orders){
+
+                Intent intent = new Intent(this, OrdersActivity.class);
+                intent.putExtra("category", category);
+                startActivity(intent);
+            }
+
+            if(itemId == R.id.nav_category){
+                Intent intent = new Intent(this, CategoryActivity.class);
+
+                startActivityForResult(intent, 1);
+            }
+
+            if(itemId == R.id.nav_logout){
+                Paper.book().destroy();
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            }
+
+            if(itemId == R.id.nav_settings){
+
+                Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
+                intent.putExtra("category", category);
+                startActivity(intent);
+            }
         }
-
-        if(itemId == R.id.nav_search){
-
-            Intent intent = new Intent(this, SearchBooksActivity.class);
-
-            startActivity(intent);
-        }
-
-        if(itemId == R.id.nav_orders){
-
-            Intent intent = new Intent(this, OrdersActivity.class);
-            intent.putExtra("category", category);
-            startActivity(intent);
-        }
-
-        if(itemId == R.id.nav_category){
-            Intent intent = new Intent(this, CategoryActivity.class);
-
-            startActivity(intent);
-        }
-
-        if(itemId == R.id.nav_logout){
-            Paper.book().destroy();
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
-        }
-
-        if(itemId == R.id.nav_settings){
-
-            Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
-            startActivity(intent);
-        }
-
 
         DrawerLayout drawerL = findViewById(R.id.drawer_layout);
         drawerL.closeDrawer(GravityCompat.START);
@@ -330,11 +341,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(status != null) {
+                    if(status.equals("Admin")) {
                         Intent intent = new Intent(HomeActivity.this, AdminProductMaintenanceActivity.class);
                         intent.putExtra("id", book.getPid());
                         intent.putExtra("image", book.getImage());
-                        intent.putExtra("category", book.getCategory());
+                        intent.putExtra("category", category);
+                        intent.putExtra("Admin", status);
                         startActivity(intent);
                     }
                     else {
@@ -342,7 +354,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         intent.putExtra("id", book.getPid());
                         intent.putExtra("recommendationId", book.getId());
                         intent.putExtra("image", book.getImage());
-                        intent.putExtra("category", book.getCategory());
+                        intent.putExtra("category", category);
                         startActivity(intent);
 
                     }

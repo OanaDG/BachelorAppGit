@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.bachelorapp.Collection.Collection;
 import com.example.bachelorapp.Model.Users;
+import com.example.bachelorapp.Admin.AdminCategoryActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,7 +26,7 @@ import io.paperdb.Paper;
 
 public class LoginActivity extends AppCompatActivity {
 
-    TextView tvSign, tvAdmin, tvNotAdmin;
+    TextView tvSign, tvAdmin, tvNotAdmin, tvForgotPassword;
     EditText etUser, etPassword;
     Button btnLog;
     CheckBox cbRemember;
@@ -37,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         tvSign = findViewById(R.id.tvSignUp);
+        tvForgotPassword = findViewById(R.id.tvForgot);
         tvAdmin = findViewById(R.id.tvAdmin);
         tvNotAdmin = findViewById(R.id.tvNotAdmin);
         etUser = findViewById(R.id.editTextTextPersonName);
@@ -72,6 +74,15 @@ public class LoginActivity extends AppCompatActivity {
                 tvAdmin.setVisibility(View.VISIBLE);
                 tvNotAdmin.setVisibility(View.INVISIBLE);
                 parentDbName = "Users";
+            }
+        });
+
+        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
+                intent.putExtra("password", "login");
+                startActivity(intent);
             }
         });
 

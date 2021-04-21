@@ -73,6 +73,14 @@
     <string name="books">Books</string>
     <string name="product_maintenance">Product Maintenance</string>
     <string name="apply_changes">Apply changes</string>
+    <string name="delete_book">Delete book</string>
+    <string name="set_security_questions">Set security questions</string>
+    <string name="answer_the_following_security_questions">Answer the following security questions</string>
+    <string name="please_write_your_username">Please write your username</string>
+    <string name="reset_password">Reset password</string>
+    <string name="which_is_your_favourite_city">Which is your favourite city?</string>
+    <string name="which_is_your_favourite_book">Which is your favourite book?</string>
+    <string name="check_questions">Check questions</string>
     <string-array name="spinner">
         <item>Bestsellers</item>
         <item>Discounted</item>

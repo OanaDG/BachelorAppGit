@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,10 +41,11 @@ public class SettingsActivity extends AppCompatActivity {
     EditText etEmailSettings;
     TextView tvUpdate;
     ImageView tvClose;
+    Button btnSecurityQuestion;
     Uri imgUri;
     String myUrl = "";
     StorageReference storageProfilePictureRef;
-    String checker = "";
+    String checker = "", category;
     StorageTask uploadTask;
 
     @Override
@@ -51,9 +53,12 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        category = getIntent().getStringExtra("category");
+
         storageProfilePictureRef = FirebaseStorage.getInstance().getReference().child("Profile pictures");
 
         imgProfileSettings = findViewById(R.id.imgPhotoSettings);
+        btnSecurityQuestion = findViewById(R.id.btnSecurityQuestion);
         etEmailSettings = findViewById(R.id.etSettingsEmail);
         tvClose = findViewById(R.id.tvCloseBtn);
         tvUpdate = findViewById(R.id.tvUpdateAccountBtn);
@@ -64,6 +69,9 @@ public class SettingsActivity extends AppCompatActivity {
         tvClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(SettingsActivity.this, HomeActivity.class);
+                intent.putExtra("category", category);
+                startActivity(intent);
                 finish();
             }
         });
@@ -88,6 +96,16 @@ public class SettingsActivity extends AppCompatActivity {
                 checker = "clicked";
                 CropImage.activity(imgUri).setAspectRatio(1, 1)
                         .start(SettingsActivity.this);
+            }
+        });
+
+        btnSecurityQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SettingsActivity.this, ResetPasswordActivity.class);
+                intent.putExtra("password", "settings");
+                intent.putExtra("category", category);
+                startActivity(intent);
             }
         });
     }

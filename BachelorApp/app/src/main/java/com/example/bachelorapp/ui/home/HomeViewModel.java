@@ -1,4 +1,4 @@
-package com.example.bachelorapp.ui.home;
+package com.example.bachelorapp.UI.home;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

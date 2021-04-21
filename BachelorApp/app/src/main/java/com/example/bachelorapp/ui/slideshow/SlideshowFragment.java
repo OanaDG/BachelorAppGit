@@ -1,4 +1,4 @@
-package com.example.bachelorapp.ui.slideshow;
+package com.example.bachelorapp.UI.slideshow;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

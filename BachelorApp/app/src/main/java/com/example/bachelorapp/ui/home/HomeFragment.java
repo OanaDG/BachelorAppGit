@@ -1,4 +1,4 @@
-package com.example.bachelorapp.ui.home;
+package com.example.bachelorapp.UI.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
