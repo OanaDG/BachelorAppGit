@@ -1,15 +1,24 @@
 package com.example.bachelorapp.Model;
 
 public class Users {
-    private String email, password, username, image;
+    private String email, password, username, image, genres;
 
     public Users() {}
 
-    public Users(String email, String password, String username, String image) {
+    public Users(String email, String password, String username, String image, String genres) {
         this.email = email;
         this.password = password;
         this.username = username;
         this.image = image;
+        this.genres = genres;
+    }
+
+    public String getGenres() {
+        return genres;
+    }
+
+    public void setGenres(String genres) {
+        this.genres = genres;
     }
 
     public String getEmail() {

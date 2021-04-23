@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.bachelorapp.HomeActivity;
+import com.example.bachelorapp.User.HomeActivity;
 import com.example.bachelorapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

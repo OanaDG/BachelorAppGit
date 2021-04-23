@@ -1,14 +1,14 @@
 package com.example.bachelorapp.Model;
 
 public class Books {
-    private String title, author, description, price, image, category, pid, id, date, time, rating;
+    private String title, author, description, price, image, category, pid, id, date, time, rating, genres;
 
     public Books()
     {
 
     }
 
-    public Books(String title, String author, String description, String price, String image, String category, String pid, String id, String date, String time, String rating) {
+    public Books(String title, String author, String description, String price, String image, String category, String pid, String id, String date, String time, String rating, String genres) {
         this.title = title;
         this.author = author;
         this.description = description;
@@ -20,6 +20,15 @@ public class Books {
         this.date = date;
         this.time = time;
         this.rating = rating;
+        this.genres = genres;
+    }
+
+    public String getGenres() {
+        return genres;
+    }
+
+    public void setGenres(String genres) {
+        this.genres = genres;
     }
 
     public String getTitle() {

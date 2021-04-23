@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.example.bachelorapp.HomeActivity;
-import com.example.bachelorapp.LoginActivity;
+import com.example.bachelorapp.User.HomeActivity;
+import com.example.bachelorapp.User.LoginActivity;
 import com.example.bachelorapp.R;
 
 public class AdminCategoryActivity extends AppCompatActivity {

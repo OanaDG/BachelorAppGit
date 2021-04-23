@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    tools:context=".User.GenrePreferencesActivity">
+
+    <TextView
+        android:id="@+id/tvChooseGenres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:text="@string/choose_your_favourite_book_genres"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <CheckBox
+        android:id="@+id/cbAdventure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/adventure"
+        android:layout_below="@+id/tvChooseGenres"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginLeft="40dp"/>
+
+    <CheckBox
+        android:id="@+id/cbDevelopment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/development"
+        android:layout_below="@+id/tvChooseGenres"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="220dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+       />
+
+    <CheckBox
+        android:id="@+id/cbChildren"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/children"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginLeft="40dp"
+        android:layout_below="@id/cbAdventure"
+        />
+
+    <CheckBox
+        android:id="@+id/cbRomance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/romance"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="220dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_below="@id/cbDevelopment"/>
+
+    <CheckBox
+        android:id="@+id/cbDrama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/drama"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginLeft="40dp"
+        android:layout_below="@id/cbChildren"
+        />
+
+    <CheckBox
+        android:id="@+id/cbComedy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/comedy"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="220dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_below="@id/cbRomance"/>
+
+    <CheckBox
+        android:id="@+id/cbFantasy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fantasy"
+        android:layout_below="@id/cbDrama"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginLeft="40dp"/>
+
+    <CheckBox
+        android:id="@+id/cbSciFi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sci_fi"
+        android:layout_below="@id/cbComedy"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="220dp"
+        android:textStyle="bold"
+        android:textSize="18sp"/>
+
+    <CheckBox
+        android:id="@+id/cbCrime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/crime"
+        android:layout_below="@id/cbFantasy"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginLeft="40dp"/>
+
+    <CheckBox
+        android:id="@+id/cbThriller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/thriller"
+        android:layout_below="@id/cbSciFi"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="220dp"
+        android:textStyle="bold"
+        android:textSize="18sp"/>
+
+    <CheckBox
+        android:id="@+id/cbMystery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mystery"
+        android:layout_below="@id/cbCrime"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginLeft="40dp"/>
+
+    <CheckBox
+        android:id="@+id/cbWestern"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/western"
+        android:layout_below="@id/cbThriller"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="220dp"
+        android:textStyle="bold"
+        android:textSize="18sp"/>
+
+    <CheckBox
+        android:id="@+id/cbBiography"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/biography"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginLeft="40dp"
+        android:layout_below="@id/cbMystery"/>
+
+    <CheckBox
+        android:id="@+id/cbAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/action"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="220dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_below="@id/cbWestern"/>
+
+    <Button
+        android:id="@+id/btnFinishSignup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/send_answers"
+        android:background="@drawable/button"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:padding="10dp"
+        android:layout_below="@id/cbBiography"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>
