@@ -58,7 +58,7 @@ public class OrdersActivity extends AppCompatActivity {
 
                         FirebaseRecyclerAdapter<Orders, OrdersActivity.OrdersViewHolder> adapter = new FirebaseRecyclerAdapter<Orders, OrdersActivity.OrdersViewHolder>(ordersFirebaseRecyclerOptions) {
                             @Override
-                            protected void onBindViewHolder(@NonNull OrdersViewHolder holder, int position, @NonNull final Orders model) {
+                            protected void onBindViewHolder(@NonNull OrdersViewHolder holder, final int position, @NonNull final Orders model) {
                                 holder.tvUsername.setText("Name: " + model.getName());
                                 holder.tvPhone.setText("Phone: " + model.getPhone());
                                 holder.tvTotalPrice.setText("Price: " + model.getTotalPrice() + " lei");
@@ -68,9 +68,12 @@ public class OrdersActivity extends AppCompatActivity {
                                 holder.btnShowProducts.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
+                                        String id = getRef(position).getKey();
                                         Intent intent = new Intent(OrdersActivity.this, OrderedBooksActivity.class);
-                                        intent.putExtra("username", model.getName());
+                                        intent.putExtra("username", Collection.currentUser.getUsername());
+                                        intent.putExtra("id", id);
                                         intent.putExtra("category", category);
+                                        intent.putExtra("order", model.getDateTime());
                                         startActivity(intent);
                                     }
                                 });

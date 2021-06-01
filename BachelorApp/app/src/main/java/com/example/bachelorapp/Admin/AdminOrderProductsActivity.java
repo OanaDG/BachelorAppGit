@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,10 +24,11 @@ import com.squareup.picasso.Picasso;
 
 public class AdminOrderProductsActivity extends AppCompatActivity {
 
+    private static final String TAG = AdminOrderProductsActivity.class.getSimpleName();
     RecyclerView productsList;
     RecyclerView.LayoutManager layoutManager;
     DatabaseReference productsRef;
-    String username;
+    String username, id;
     ImageView btnBack;
 
     @Override
@@ -35,6 +37,9 @@ public class AdminOrderProductsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_order_products);
 
         username = getIntent().getStringExtra("username");
+        id = getIntent().getStringExtra("id");
+
+        Log.d(TAG, "onCreate: " + id + " " + username);
 
         btnBack = findViewById(R.id.imgReturnAdminProductsOrdersBtn);
         productsList = findViewById(R.id.layoutProductList);
@@ -42,7 +47,7 @@ public class AdminOrderProductsActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         productsList.setLayoutManager(layoutManager);
 
-        productsRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child("Admin View").child(username).child("Products");
+        productsRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child("Admin View").child(username).child(id).child("Products");
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override

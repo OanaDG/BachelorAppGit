@@ -101,7 +101,7 @@ public class ConfirmOrderActivity extends AppCompatActivity {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
         currentDate = dateFormat.format(date.getTime());
 
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss a");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm a");
         currentTime = timeFormat.format(date.getTime());
 
         final DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(Collection.currentUser.getUsername()).child(currentDate + " " + currentTime);

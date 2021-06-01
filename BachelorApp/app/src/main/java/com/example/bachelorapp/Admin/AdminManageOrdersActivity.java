@@ -62,7 +62,7 @@ public class AdminManageOrdersActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Users user = dataSnapshot.getValue(Users.class);
+                    final Users user = dataSnapshot.getValue(Users.class);
                         try {
                             Log.d(TAG, "onDataChange: " +user.getUsername());
                             ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(user.getUsername());
@@ -82,7 +82,8 @@ public class AdminManageOrdersActivity extends AppCompatActivity {
                                         @Override
                                         public void onClick(View view) {
                                             Intent intent = new Intent(AdminManageOrdersActivity.this, AdminOrderProductsActivity.class);
-                                            intent.putExtra("username", model.getName());
+                                            intent.putExtra("username", user.getUsername());
+                                            intent.putExtra("id", model.getDateTime());
                                             startActivity(intent);
                                         }
                                     });

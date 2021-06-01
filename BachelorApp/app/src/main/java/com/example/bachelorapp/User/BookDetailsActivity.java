@@ -141,11 +141,11 @@ public class BookDetailsActivity extends AppCompatActivity {
         final String currentTime, currentDate;
 
         Calendar date = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM dd, yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
         currentDate = dateFormat.format(date.getTime());
 
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm a");
-        currentTime = dateFormat.format(date.getTime());
+        currentTime = timeFormat.format(date.getTime());
 
         final DatabaseReference cartRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
 
@@ -164,11 +164,19 @@ public class BookDetailsActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()) {
-                    Toast.makeText(BookDetailsActivity.this, "Added to the cart", Toast.LENGTH_SHORT).show();
+                    cartRef.child("Admin View").child(Collection.currentUser.getUsername()).child(currentDate + " " +currentTime).child("Products").child(bookId).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()) {
+                                Toast.makeText(BookDetailsActivity.this, "Added to the cart", Toast.LENGTH_SHORT).show();
 
                                 Intent intent = new Intent(BookDetailsActivity.this, HomeActivity.class);
                                 intent.putExtra("category", category);
                                 startActivity(intent);
+                            }
+                        }
+                    });
+
 
                                 // incearca sa construiesti admin view dupa ce ai toate prod
 
