@@ -98,6 +98,8 @@
     <string name="action">Action</string>
     <string name="send_answers">Send answers</string>
     <string name="customer_purchases_report">Customer purchases report</string>
+    <string name="display_users_genre_preferences">Display users\' genre preferences</string>
+    <string name="toggle_values">Toggle Values</string>
     <string-array name="spinner">
         <item>Bestsellers</item>
         <item>Discounted</item>

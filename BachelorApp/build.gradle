@@ -6,6 +6,7 @@ buildscript {
         maven {
 
             url "https://chaquo.com/maven"
+
         }
     }
     dependencies {
@@ -22,6 +23,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url 'https://jitpack.io' }
     }
 }
 

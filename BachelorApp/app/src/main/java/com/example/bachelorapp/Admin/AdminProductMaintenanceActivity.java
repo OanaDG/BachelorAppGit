@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.bachelorapp.Model.Users;
 import com.example.bachelorapp.User.HomeActivity;
 import com.example.bachelorapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,13 +29,15 @@ import java.util.HashMap;
 
 public class AdminProductMaintenanceActivity extends AppCompatActivity {
 
-    Button btnApplyChanges, btnDeleteBook;
+    private static final String TAG = AdminProductMaintenanceActivity.class.getSimpleName();
+    Button btnApplyChanges, btnDeleteBook, btnCheckPreferences;
     ImageView btnBack;
     EditText etPrice, etDescription;
     Spinner categorySpinner;
     ImageView imgBook;
     String category, bookImage, bookId, status;
-    DatabaseReference booksRef;
+    DatabaseReference booksRef, usersRef;
+    HashMap<String, Integer> data = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +50,49 @@ public class AdminProductMaintenanceActivity extends AppCompatActivity {
         bookId = intent.getStringExtra("id");
         status = intent.getStringExtra("Admin");
 
+        data.put("adventure", 0);
+        data.put("children", 0);
+        data.put("drama", 0);
+        data.put("fantasy", 0);
+        data.put("crime", 0);
+        data.put("mystery", 0);
+        data.put("biography", 0);
+        data.put("development", 0);
+        data.put("romance", 0);
+        data.put("comedy", 0);
+        data.put("sci-fi", 0);
+        data.put("western", 0);
+        data.put("action", 0);
+        data.put("thriller", 0);
+
+        usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
+
+        usersRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Iterable<DataSnapshot> userChildren = snapshot.getChildren();
+                for(DataSnapshot snap : userChildren) {
+                    Users user = snap.getValue(Users.class);
+                    String[] bookGenres = user.getGenres().trim().split(" ");
+                    for(int i = 0; i<bookGenres.length; i++) {
+                        int noUsers = data.get(bookGenres[i]) + 1;
+                        data.put(bookGenres[i], noUsers);
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        Log.d(TAG, "onCreate: " + data.get("romance").toString());
         booksRef = FirebaseDatabase.getInstance().getReference().child("Products").child(bookId);
 
         btnApplyChanges = findViewById(R.id.btnApplyChanges);
+        btnCheckPreferences = findViewById(R.id.btnCheckGenrePreferences);
         btnDeleteBook = findViewById(R.id.btnDeleteBook);
         btnBack = findViewById(R.id.imgReturnBookMaintenanceBtn);
         etPrice = findViewById(R.id.etBookPriceMaintenance);
@@ -62,7 +106,7 @@ public class AdminProductMaintenanceActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AdminProductMaintenanceActivity.this, HomeActivity.class);
-                intent.putExtra("category", category);
+                intent.putExtra("category", "All Books");
                 intent.putExtra("Admin", status);
                 startActivity(intent);
             }
@@ -82,7 +126,18 @@ public class AdminProductMaintenanceActivity extends AppCompatActivity {
             }
         });
 
+        btnCheckPreferences.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(AdminProductMaintenanceActivity.this, AdminUsersGenrePreferencesGraphActivity.class);
+                intent.putExtra("data", data);
+                startActivity(intent);
+            }
+        });
+
 }
+
 
     private void deleteBook() {
         booksRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {

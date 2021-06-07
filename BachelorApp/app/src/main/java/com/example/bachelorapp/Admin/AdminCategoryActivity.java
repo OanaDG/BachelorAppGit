@@ -31,9 +31,9 @@ public class AdminCategoryActivity extends AppCompatActivity {
 
     private static final String TAG = AdminCategoryActivity.class.getSimpleName();
     ImageView imgBestseller, imgDiscount, imgAll, tvLogout;
-    Button btnManageOrders, btnProductMaintenance, btnCustomerPurchasesReport;
+    Button btnManageOrders, btnProductMaintenance, btnCustomerPurchasesReport, btnGraph;
     StringBuilder builder = new StringBuilder();
-    DatabaseReference ordersRef, usersRef;
+    DatabaseReference ordersRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         btnManageOrders = findViewById(R.id.btnCheckOrders);
         btnProductMaintenance = findViewById(R.id.btnMaintenance);
         btnCustomerPurchasesReport = findViewById(R.id.btnClientReport);
+        btnGraph = findViewById(R.id.btnGraph);
         builder.append("Customer,Revenue(RON)");
 
         ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders");
@@ -141,6 +142,8 @@ public class AdminCategoryActivity extends AppCompatActivity {
                 generateRevenueByClientReport();
             }
         });
+
+
     }
 
     public void generateRevenueByClientReport() {
