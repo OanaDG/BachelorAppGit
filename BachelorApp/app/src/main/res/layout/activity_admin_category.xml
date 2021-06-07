@@ -47,12 +47,12 @@
 
         <ImageView
             android:id="@+id/imgBestseller"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/bestseller"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:layout_below="@id/tvInstruction"/>
         <TextView
             android:layout_width="wrap_content"
@@ -64,13 +64,13 @@
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:layout_marginTop="80dp"/>
+            android:layout_marginTop="70dp"/>
 
 
         <ImageView
             android:id="@+id/imgDiscount"
             android:layout_width="wrap_content"
-            android:layout_height="150dp"
+            android:layout_height="120dp"
             android:layout_marginLeft="200dp"
 
             android:layout_weight="1"
@@ -87,12 +87,12 @@
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:layout_marginTop="60dp"/>
+            android:layout_marginTop="40dp"/>
 
     <ImageView
         android:id="@+id/imgAll"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_below="@id/imgDiscount"
         android:layout_marginLeft="30dp"
 
@@ -109,7 +109,23 @@
         android:textSize="22sp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:layout_marginTop="60dp"/>
+        android:layout_marginTop="40dp"/>
+
+    <Button
+        android:id="@+id/btnClientReport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_above="@id/btnMaintenance"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/log_btn"
+        android:text="@string/customer_purchases_report"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btnMaintenance"

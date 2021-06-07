@@ -97,6 +97,7 @@
     <string name="biography">Biography</string>
     <string name="action">Action</string>
     <string name="send_answers">Send answers</string>
+    <string name="customer_purchases_report">Customer purchases report</string>
     <string-array name="spinner">
         <item>Bestsellers</item>
         <item>Discounted</item>
