@@ -164,7 +164,7 @@ public class BookDetailsActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()) {
-                    cartRef.child("Admin View").child(Collection.currentUser.getUsername()).child(currentDate + " " +currentTime).child("Products").child(bookId).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    cartRef.child("Admin View").child(Collection.currentUser.getUsername()).child(currentDate).child("Products").child(bookId).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()) {

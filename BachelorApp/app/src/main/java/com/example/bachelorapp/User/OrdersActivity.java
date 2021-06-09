@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class OrdersActivity extends AppCompatActivity {
+    private static final String TAG = OrdersActivity.class.getSimpleName();
     RecyclerView ordersList;
     DatabaseReference ordersRef;
     ImageView btnBack;
@@ -68,12 +70,13 @@ public class OrdersActivity extends AppCompatActivity {
                                 holder.btnShowProducts.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        String id = getRef(position).getKey();
+                                        String id = getRef(position).getKey().substring(0, 12);
                                         Intent intent = new Intent(OrdersActivity.this, OrderedBooksActivity.class);
                                         intent.putExtra("username", Collection.currentUser.getUsername());
                                         intent.putExtra("id", id);
                                         intent.putExtra("category", category);
-                                        intent.putExtra("order", model.getDateTime());
+                                        Log.d(TAG, "onClick: " + model.getDateTime());
+                                        intent.putExtra("order", model.getDateTime().substring(0, 12));
                                         startActivity(intent);
                                     }
                                 });
