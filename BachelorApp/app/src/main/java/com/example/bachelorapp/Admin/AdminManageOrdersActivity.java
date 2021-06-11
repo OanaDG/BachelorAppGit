@@ -83,7 +83,7 @@ public class AdminManageOrdersActivity extends AppCompatActivity {
                                         public void onClick(View view) {
                                             Intent intent = new Intent(AdminManageOrdersActivity.this, AdminOrderProductsActivity.class);
                                             intent.putExtra("username", user.getUsername());
-                                            intent.putExtra("id", model.getDateTime());
+                                            intent.putExtra("id", model.getDateTime().substring(0, 12));
                                             startActivity(intent);
                                         }
                                     });
@@ -96,7 +96,7 @@ public class AdminManageOrdersActivity extends AppCompatActivity {
                                             };
 
                                             AlertDialog.Builder builder = new AlertDialog.Builder(AdminManageOrdersActivity.this);
-                                            builder.setTitle("Is the order shipped?");
+                                            builder.setTitle("Is the order older than 3 months?");
                                             builder.setItems(options, new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -104,9 +104,9 @@ public class AdminManageOrdersActivity extends AppCompatActivity {
                                                         String username = getRef(position).getKey();
                                                         removeOrder(username);
                                                     }
-                                                    else {
-                                                        finish();
-                                                    }
+//                                                    else {
+//                                                        finish();
+//                                                    }
                                                 }
                                             }).show();
                                         }
