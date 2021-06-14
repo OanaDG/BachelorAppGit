@@ -104,7 +104,7 @@ public class GenrePreferencesActivity extends AppCompatActivity {
                     builder.append("western ");
                 }
 
-                if(builder.equals("")) {
+                if(builder.toString().equals("")) {
                     Toast.makeText(GenrePreferencesActivity.this, "Please check at least one category", Toast.LENGTH_LONG).show();
                 }
                 else {

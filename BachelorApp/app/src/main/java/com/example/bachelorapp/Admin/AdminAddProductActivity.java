@@ -32,9 +32,9 @@ import java.util.HashMap;
 
 public class AdminAddProductActivity extends AppCompatActivity {
 
-    String categoryName, description, title, author, id, price, rating, saveCurrentDate, saveCurrentTime, productRandomKey, downloadImageUrl;
+    String categoryName, description, title, author, id, price, rating, saveCurrentDate, saveCurrentTime, productRandomKey, downloadImageUrl, genres;
     Button btnAddProduct;
-    EditText etTitle, etDescription, etPrice, etId, etAuthor, etRating;
+    EditText etTitle, etDescription, etPrice, etId, etAuthor, etRating, etGenres;
     ImageView imgPhoto, imgClose;
     private static final int galleryPic = 1;
     Uri imageUri;
@@ -57,6 +57,7 @@ public class AdminAddProductActivity extends AppCompatActivity {
         etPrice = findViewById(R.id.etPrice);
         etRating = findViewById(R.id.etRating);
         etDescription = findViewById(R.id.etDescription);
+        etGenres = findViewById(R.id.etGenres);
         imgClose = findViewById(R.id.tvReturnBtn);
 
         imgPhoto = findViewById(R.id.imgPhoto);
@@ -94,6 +95,7 @@ public class AdminAddProductActivity extends AppCompatActivity {
         id = etId.getText().toString();
         rating = etRating.getText().toString();
         price = etPrice.getText().toString();
+        genres = etGenres.getText().toString();
 
 
         if(imageUri == null)
@@ -117,6 +119,9 @@ public class AdminAddProductActivity extends AppCompatActivity {
         }
         else if("".equals(id)){
             Toast.makeText(this, "Please write a product id", Toast.LENGTH_LONG).show();
+        }
+        else if("".equals(genres)){
+            Toast.makeText(this, "Please write the book genres", Toast.LENGTH_LONG).show();
         }
         else{
             storeProductInformation();
@@ -192,6 +197,7 @@ public class AdminAddProductActivity extends AppCompatActivity {
         productMap.put("price", price);
         productMap.put("rating", rating);
         productMap.put("description", description);
+        productMap.put("genres", genres);
 
 
         productRef.child(productRandomKey).updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {

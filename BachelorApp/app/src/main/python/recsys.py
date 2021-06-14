@@ -57,6 +57,8 @@ def checkBooks(initial_set, recommendation):
     for x in recommendation:
         if x not in initial_set:
             r.append(x)
+    final_list = set(r)
+    return list(final_list)
     return r
 
 

@@ -49,7 +49,7 @@
         android:hint="@string/book_id"
         android:background="@drawable/log_btn"
         android:layout_below="@id/imgPhoto"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:textColor="@color/black"
         android:layout_centerHorizontal="true"
         android:padding="5dp"
@@ -102,10 +102,25 @@
         android:inputType="numberDecimal" />
 
     <EditText
+        android:id="@+id/etGenres"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint="@string/book_genres"
+        android:background="@drawable/log_btn"
+        android:layout_below="@id/etPrice"
+        android:textColor="@color/black"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:inputType="textPersonName"
+        />
+
+    <EditText
         android:id="@+id/etRating"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_below="@id/etPrice"
+        android:layout_below="@id/etGenres"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:background="@drawable/log_btn"
@@ -137,7 +152,7 @@
         android:background="@drawable/button"
         android:layout_below="@id/etDescription"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:text="@string/add_book" />

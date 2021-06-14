@@ -1,13 +1,13 @@
 book_id,title,authors,original_publication_year,genres
 1,The Hunger Games (The Hunger Games  #1),Suzanne Collins,2008,Adventure|Development|Children|Comedy|Fantasy
-2,Harry Potter and the Sorcerer's Stone (Harry Potter  #1),J.K. Rowling  Mary GrandPré,1997,Adventure|Children|Fantasy
+2,Harry Potter and the Sorcerer's Stone,J.K. Rowling  Mary GrandPré,1997,Adventure|Children|Fantasy
 3,Twilight (Twilight  #1),Stephenie Meyer,2005,Comedy|Romance
 4,To Kill a Mockingbird,Harper Lee,1960,Drama
 5,The Great Gatsby,F. Scott Fitzgerald,1925,Comedy
 6,The Fault in Our Stars,John Green,2012,Action|Crime|Thriller
 7,The Hobbit,J.R.R. Tolkien,1937,Comedy|Romance
 8,The Catcher in the Rye,J.D. Salinger,1951,Adventure|Children
-9,Angels & Demons  (Robert Langdon  #1),Dan Brown,2000,Action
+9,Angels & Demons,Dan Brown,2000,Action
 10,Pride and Prejudice,Jane Austen,1813,Romance
 11,The Kite Runner,Khaled Hosseini,2003,Drama
 12,Divergent (Divergent  #1),Veronica Roth,2011,Comedy|Horror
@@ -24,8 +24,8 @@ book_id,title,authors,original_publication_year,genres
 23,Harry Potter and the Chamber of Secrets (Harry Potter  #2),J.K. Rowling  Mary GrandPré,1998,Action|Crime|Thriller
 24,Harry Potter and the Goblet of Fire (Harry Potter  #4),J.K. Rowling  Mary GrandPré,2000,Drama|Sci-Fi
 25,Harry Potter and the Deathly Hallows (Harry Potter  #7),J.K. Rowling  Mary GrandPré,2007,Drama|Romance
-26,The Da Vinci Code (Robert Langdon  #2),Dan Brown,2003,Drama
-27,Harry Potter and the Half-Blood Prince (Harry Potter  #6),J.K. Rowling  Mary GrandPré,2005,Children|Drama
+26,The Da Vinci Code,Dan Brown,2003,Drama
+27,Harry Potter and the Half-Blood Prince,J.K. Rowling  Mary GrandPré,2005,Children|Drama
 28,Lord of the Flies,William Golding,1954,Drama|Romance
 29,Romeo and Juliet,William Shakespeare  Robert           Jackson,1595,Adventure|Drama|Fantasy|Mystery|Sci-Fi
 30,Gone Girl,Gillian Flynn,2012,Crime|Drama
@@ -406,7 +406,7 @@ book_id,title,authors,original_publication_year,genres
 405,Breakfast of Champions,Kurt Vonnegut Jr.,1973,Adventure|Children|Drama
 406,The New Drawing on the Right Side of the Brain,Betty Edwards,1979,Crime|Drama|Thriller
 407,Bel Canto,Ann Patchett,2001,Thriller
-408,Guns  Germs  and Steel: The Fates of Human Societies,Jared Diamond,1997,Drama|Western
+408,Guns Germs and Steel: The Fates of Human Societies,Jared Diamond,1997,Drama|Western
 409,Fried Green Tomatoes at the Whistle Stop Cafe,Fannie Flagg,1987,Action|Adventure|Crime|Drama|Romance|Thriller
 410,Things Fall Apart (The African Trilogy  #1),Chinua Achebe,1958,Comedy
 411,The Undomestic Goddess,Sophie Kinsella,2005,Drama|Romance

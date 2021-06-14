@@ -48,7 +48,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         btnProductMaintenance = findViewById(R.id.btnMaintenance);
         btnCustomerPurchasesReport = findViewById(R.id.btnClientReport);
 
-        builder.append("Customer,Revenue(RON)");
+        builder.append("Customer,Revenue(RON),Number of orders");
 
         ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders");
         ordersRef.addValueEventListener(new ValueEventListener() {
@@ -61,12 +61,14 @@ public class AdminCategoryActivity extends AppCompatActivity {
                     DataSnapshot allSnapshots = snapshot.child(name);
                     Iterable<DataSnapshot> orderChildren = allSnapshots.getChildren();
                     double revenue = 0;
+                    int noOrders = 0;
                     for (DataSnapshot snap : orderChildren) {
                         Orders order = snap.getValue(Orders.class);
                         revenue += Double.valueOf(order.getTotalPrice());
+                        noOrders ++;
 
                     }
-                    builder.append(revenue);
+                    builder.append(revenue + "," + noOrders);
                 }
 
             }
