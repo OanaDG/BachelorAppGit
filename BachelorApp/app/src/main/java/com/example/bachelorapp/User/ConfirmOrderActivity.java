@@ -108,6 +108,7 @@ public class ConfirmOrderActivity extends AppCompatActivity {
 
         HashMap<String, Object> ordersMap = new HashMap<>();
         ordersMap.put("totalPrice", totalPrice);
+        ordersMap.put("username", Collection.currentUser.getUsername());
         ordersMap.put("name", etName.getText().toString());
         ordersMap.put("email", etEmail.getText().toString());
         ordersMap.put("phone", etPhone.getText().toString());

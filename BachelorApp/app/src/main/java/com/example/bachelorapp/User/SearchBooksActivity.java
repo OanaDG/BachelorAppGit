@@ -55,7 +55,8 @@ public class SearchBooksActivity extends AppCompatActivity {
         super.onStart();
         try {
             DatabaseReference bookRef = FirebaseDatabase.getInstance().getReference().child("Products");
-            FirebaseRecyclerOptions<Books> options = new FirebaseRecyclerOptions.Builder<Books>().setQuery(bookRef.orderByChild("title").startAt(searchInput.toUpperCase()).endAt(searchInput.toLowerCase() + "\uf8ff"), Books.class).build();
+            String transformedInput = transformInput(searchInput);
+            FirebaseRecyclerOptions<Books> options = new FirebaseRecyclerOptions.Builder<Books>().setQuery(bookRef.orderByChild("title").startAt(transformedInput).endAt(searchInput.toLowerCase() + "\uf8ff"), Books.class).build();
             FirebaseRecyclerAdapter<Books, BookViewHolder> adapter = new FirebaseRecyclerAdapter<Books, BookViewHolder>(options) {
                 @Override
                 protected void onBindViewHolder(@NonNull BookViewHolder holder, int position, @NonNull final Books model) {
@@ -102,6 +103,17 @@ public class SearchBooksActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    private String transformInput(String searchInput) {
+        String[] words = searchInput.split(" ");
+        StringBuilder builder = new StringBuilder();
+        for(int i = 0; i < words.length; i++) {
+
+            builder.append(words[i].substring(0, 1).toUpperCase() + words[i].substring(1) + " ");
+        }
+
+        return builder.toString().trim();
     }
 
 }

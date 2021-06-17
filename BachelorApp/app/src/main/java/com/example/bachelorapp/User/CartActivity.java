@@ -40,7 +40,7 @@ public class CartActivity extends AppCompatActivity {
     Button btnNext;
     ImageView btnBack;
     String category;
-    int totalOrderPrice = 0;
+    float totalOrderPrice = 0;
     TextView tvTotalPrice;
     List<String> recommendationIdList = new ArrayList<>();
     @Override
@@ -130,6 +130,7 @@ public class CartActivity extends AppCompatActivity {
                                 if(i == 0) {
                                     Intent intent = new Intent(CartActivity.this, BookDetailsActivity.class);
                                     intent.putExtra("id", model.getId());
+                                    intent.putExtra("recommendationId", model.getRecommendationId());
                                     intent.putExtra("category", category);
                                     intent.putExtra("image", model.getImage());
                                     startActivity(intent);
